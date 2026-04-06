@@ -569,6 +569,10 @@ footer strong { color: var(--text-secondary); }
 .hidden { display: none !important; }
 
 /* === METHODOLOGY PAGE === */
+body:has(.methodology-content) {
+  overflow-y: auto;
+  height: auto;
+}
 .methodology-content {
   max-width: 900px;
   margin: 80px auto 60px;
