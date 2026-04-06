@@ -1,189 +1,163 @@
-# FloodKH — Cambodia Flood Monitor 🌊
+# FloodKH — Phnom Penh Flood Monitor
 
-## ប្រព័ន្ធតាមដានទឹកជំនន់កម្ពុជា
+## ប្រព័ន្ធតាមដានទឹកជំនន់រាជធានីភ្នំពេញ
 
-[![Update Flood Data](https://github.com/kalim/FloodKH/actions/workflows/update.yml/badge.svg)](https://github.com/kalim/FloodKH/actions/workflows/update.yml)
+[![Update Flood Data](https://github.com/chhounk/FloodKH/actions/workflows/update.yml/badge.svg)](https://github.com/chhounk/FloodKH/actions/workflows/update.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/demo-live-brightgreen)](https://kalim.github.io/FloodKH)
-[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 
-Real-time flood monitoring and prediction dashboard for Cambodia. Tracks rainfall, soil moisture, and river discharge across 25 locations to provide early flood warnings.
+Hyperlocal flood monitoring and **72-hour prediction system** for Phnom Penh's 14 districts. Combines weather data, satellite imagery, and hydrological indicators to provide early flood warnings.
 
----
+## Why This Matters
 
-## Motivation
+Phnom Penh floods annually during the monsoon season (June–November). The Mekong, Tonle Sap, and Bassac rivers converge in the heart of the city at Chaktomuk. Districts like **Chbar Ampov**, **Dangkor**, **Prek Pnov**, and **Mean Chey** face severe flooding that displaces residents, damages infrastructure, and disrupts transport.
 
-Cambodia faces severe flooding annually, particularly during the monsoon season (June--November). The Mekong River and Tonle Sap Lake system creates a vast floodplain that makes millions of people vulnerable to rising waters each year. Existing early-warning systems are often inaccessible, fragmented, or delayed.
-
-**FloodKH** is an open-source tool that provides accessible, transparent flood risk monitoring. By combining freely available satellite and weather data with a simple classification model, it delivers near-real-time flood status updates through a lightweight web dashboard -- no proprietary software or expensive infrastructure required.
-
----
+This open-source tool provides free, transparent, district-level flood risk monitoring with a 72-hour forecast horizon.
 
 ## Live Demo
 
-[kalim.github.io/FloodKH](https://kalim.github.io/FloodKH)
-
----
+🔗 [chhounk.github.io/FloodKH](https://chhounk.github.io/FloodKH)
 
 ## Architecture
 
 ```
-┌─────────────┐     ┌──────────────┐     ┌─────────────────┐
-│  Data APIs   │────▶│ Python       │────▶│  Static JSON    │
-│  Open-Meteo  │     │ Scraper      │     │  flood_status   │
-│  NASA GPM    │     │ + Classifier │     │  flood_history  │
-│  GloFAS      │     └──────────────┘     └────────┬────────┘
-└─────────────┘            ▲                       │
-                           │                       ▼
-                    ┌──────────────┐     ┌─────────────────┐
-                    │ GitHub       │     │  GitHub Pages   │
-                    │ Actions      │     │  Leaflet Map    │
-                    │ (every 6h)   │     │  Dashboard      │
-                    └──────────────┘     └─────────────────┘
+Data Sources              Processing                    Output
+─────────────            ──────────                    ──────
+Open-Meteo ──────┐
+                 ├──→ Python Scraper ──────────→ flood_predictions.json
+Sentinel-1 SAR ──┤    + Classifier (0-100)       flood_history.json
+                 ├──→ + 72h Predictor                     │
+NASA GPM ────────┤                                        ▼
+                 │    GitHub Actions              GitHub Pages
+GloFAS ──────────┘    (every 6 hours)             Leaflet.js Map
+                                                  + Dashboard
 ```
-
-1. **Data APIs** -- Open-Meteo, NASA GPM, and GloFAS provide rainfall, soil moisture, and river discharge data.
-2. **Python Scraper + Classifier** -- Fetches the latest data for 25 Cambodian locations and computes a flood risk score.
-3. **Static JSON** -- Results are written to `flood_status.json` and `flood_history.json`.
-4. **GitHub Actions** -- A scheduled workflow runs the scraper every 6 hours and commits updated data.
-5. **GitHub Pages** -- A Leaflet-based map dashboard reads the JSON files and renders an interactive flood map.
-
----
 
 ## Features
 
-- **25 monitored locations** across Cambodia, covering major cities, river towns, and flood-prone areas
-- **Multi-source data fusion** -- combines rainfall, soil moisture, and river discharge into a single risk score
-- **4-level classification** -- Normal, Watch, Warning, Danger with clear color coding
-- **Interactive Leaflet map** -- click any marker for detailed metrics and historical trends
-- **Historical tracking** -- maintains a rolling history of flood status changes
-- **Fully automated** -- GitHub Actions updates data every 6 hours with zero manual intervention
-- **Zero-cost hosting** -- runs entirely on GitHub Pages and free API tiers
-- **Bilingual support** -- Khmer and English labels
+- **District-level monitoring** — 14 Phnom Penh districts with individual risk scores
+- **72-hour prediction** — Forecast risk levels at T+24h, T+48h, T+72h
+- **Interactive map** — Color-coded district polygons on a dark-themed Leaflet map
+- **Timeline slider** — Visualize how risk evolves over the next 3 days
+- **Multi-source data fusion** — Weather, river discharge, satellite imagery (stub), soil moisture
+- **Bilingual** — English and Khmer (ខ្មែរ) language toggle
+- **Mobile responsive** — Full-screen map with collapsible sidebar
+- **Transparent methodology** — All scoring weights and thresholds documented
 
----
+## Alert Levels
+
+| Level | Label | Score | Description |
+|-------|-------|-------|-------------|
+| 🟢 0 | NORMAL | 0–20 | No flood risk |
+| 🟡 1 | WATCH | 21–45 | Elevated conditions, monitor situation |
+| 🟠 2 | WARNING | 46–70 | High flood risk, flooding likely |
+| 🔴 3 | EMERGENCY | 71–100 | Critical, flooding imminent or active |
 
 ## Data Sources
 
-| Source | Data | Resolution | Link |
-|--------|------|------------|------|
-| **Open-Meteo** | Rainfall, temperature, soil moisture | Hourly, 1 km | [open-meteo.com](https://open-meteo.com/) |
-| **NASA GPM** | Satellite precipitation estimates | 30-min, 0.1 deg | [gpm.nasa.gov](https://gpm.nasa.gov/) |
-| **GloFAS (Copernicus)** | River discharge forecasts | Daily, 0.05 deg | [globalfloods.eu](https://www.globalfloods.eu/) |
+| Source | Provides | Status | Frequency |
+|--------|----------|--------|-----------|
+| Open-Meteo | Precipitation, soil moisture, forecasts | **Live** | 6 hours |
+| Open-Meteo Flood API | River discharge (GloFAS) | **Live** | Daily |
+| Sentinel-1 SAR | Water extent detection | Stub | ~6 days |
+| Sentinel-2 Optical | NDWI water index | Stub | ~5 days |
+| NASA GPM IMERG | Satellite-derived rainfall | Stub | 30 min |
 
-All data sources are free and publicly accessible. No API keys are required for basic usage.
+## Scoring Methodology
 
----
+Five components contribute to the 0–100 composite score:
 
-## Classification Methodology
+1. **Rainfall** (max 35 pts) — 7-day cumulative + 72h forecast + flash flood intensity
+2. **Soil Moisture** (max 15 pts) — Current saturation level + trend
+3. **River Discharge** (max 20 pts) — Current vs average ratio + Tonle Sap reversal bonus
+4. **Satellite** (max 15 pts) — Flood fraction anomaly from SAR/optical
+5. **District Vulnerability** (max 15 pts) — Drainage quality + flood history + elevation
 
-Each location receives a **flood risk score** (0--100) computed from three weighted components:
+See the [Methodology page](https://chhounk.github.io/FloodKH/methodology.html) for full details.
 
-| Component | Weight | Metric |
-|-----------|--------|--------|
-| Rainfall intensity | 40% | Cumulative precipitation over 24h and 72h windows |
-| Soil moisture | 30% | Volumetric water content at 0--10 cm depth |
-| River discharge | 30% | Current discharge vs. historical return periods |
-
-The score maps to four risk levels:
-
-| Score | Level | Color | Meaning |
-|-------|-------|-------|---------|
-| 0--25 | **Normal** | Green | No flood risk |
-| 26--50 | **Watch** | Yellow | Elevated conditions, monitor closely |
-| 51--75 | **Warning** | Orange | Flooding likely, take precautions |
-| 76--100 | **Danger** | Red | Severe flooding expected or occurring |
-
-Thresholds are calibrated against historical flood events from the Mekong River Commission records.
-
----
-
-## How to Run Locally
+## Run Locally
 
 ```bash
-# Clone the repository
-git clone https://github.com/kalim/FloodKH.git
+git clone https://github.com/chhounk/FloodKH.git
 cd FloodKH
-
-# Install Python dependencies
 pip install -r requirements.txt
 
-# Run the scraper to fetch latest data
+# Run the scraper (fetches live data)
 python -m scraper.main
 
-# Open the dashboard in your browser
-# Open docs/index.html in browser
+# Copy data to frontend
+cp data/flood_predictions.json docs/data/
+cp data/flood_history.json docs/data/
+
+# Open the dashboard
+open docs/index.html
+# or: python -m http.server 8000 -d docs
 ```
 
-**Requirements:** Python 3.11+ and an internet connection (to fetch data from APIs).
+## Run Tests
 
----
+```bash
+python -m pytest tests/ -v
+```
 
 ## Project Structure
 
 ```
 FloodKH/
-├── .github/workflows/
-│   └── update.yml          # Scheduled GitHub Actions workflow
-├── data/
-│   ├── flood_status.json   # Current flood status (generated)
-│   └── flood_history.json  # Historical records (generated)
-├── docs/
-│   ├── index.html          # Dashboard frontend
-│   ├── data/               # JSON served via GitHub Pages
-│   ├── css/
-│   └── js/
 ├── scraper/
-│   ├── __init__.py
-│   ├── main.py             # Entry point
-│   ├── classifier.py       # Flood risk scoring
-│   ├── locations.py        # 25 monitored locations
-│   └── sources/            # API client modules
+│   ├── main.py              # Orchestrator
+│   ├── classifier.py        # Current-state scoring engine
+│   ├── predictor.py         # 72-hour forecast engine
+│   ├── districts.py         # 14 Phnom Penh districts + static data
+│   ├── config.py            # All thresholds and weights
+│   ├── utils.py             # Shared utilities
+│   └── sources/
+│       ├── open_meteo.py        # Weather API (live)
+│       ├── open_meteo_flood.py  # River discharge (live)
+│       ├── sentinel1.py         # SAR water detection (stub)
+│       ├── sentinel2.py         # Optical NDWI (stub)
+│       └── nasa_gpm.py         # Satellite rainfall (stub)
+├── data/
+│   ├── flood_predictions.json
+│   ├── flood_history.json
+│   └── geojson/
+├── docs/                    # GitHub Pages frontend
+│   ├── index.html
+│   ├── methodology.html
+│   ├── css/style.css
+│   └── js/
+├── tests/
+├── .github/workflows/
+│   └── update.yml           # 6-hourly cron job
 ├── requirements.txt
-├── LICENSE
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
----
+## Roadmap
+
+- [ ] Activate Sentinel-1 SAR integration (Copernicus Dataspace API)
+- [ ] Add Sentinel-2 NDWI for optical confirmation
+- [ ] NASA GPM IMERG integration for satellite rainfall
+- [ ] Historical flood analysis and seasonal patterns
+- [ ] ML model upgrade (gradient boosting on historical data)
+- [ ] Push notifications for alert level changes
+- [ ] Mobile-optimized PWA
 
 ## Contributing
 
-Contributions are welcome. Here are some ways to help:
+Contributions are welcome! Please open an issue first to discuss proposed changes.
 
-1. **Report issues** -- If you find a bug or have a suggestion, open an issue.
-2. **Add locations** -- Propose new monitoring points by editing `scraper/locations.py`.
-3. **Improve the model** -- Help refine the classification thresholds with ground-truth flood data.
-4. **Translate** -- Help improve Khmer translations in the dashboard.
-5. **Frontend improvements** -- Enhance the dashboard UI or add new visualizations.
-
-To contribute code:
-
-```bash
-# Fork and clone
-git clone https://github.com/<your-username>/FloodKH.git
-cd FloodKH
-
-# Create a feature branch
-git checkout -b feature/your-feature
-
-# Make changes, then submit a pull request
-```
-
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes
+4. Push and open a Pull Request
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE)
 
 ---
 
-## Credits & Acknowledgments
+**Built by [Convergence](https://github.com/chhounk)**
 
-- **[Open-Meteo](https://open-meteo.com/)** -- Free weather and climate API
-- **[NASA GPM](https://gpm.nasa.gov/)** -- Global Precipitation Measurement mission
-- **[GloFAS (Copernicus)](https://www.globalfloods.eu/)** -- Global Flood Awareness System
-- **[Mekong River Commission](https://www.mrcmekong.org/)** -- Historical flood data and basin information
-- **[Leaflet](https://leafletjs.com/)** -- Open-source interactive maps
-- **[OpenStreetMap](https://www.openstreetmap.org/)** -- Map tile data
-
-Built with the goal of making flood information accessible to everyone in Cambodia.
+Data: [Open-Meteo](https://open-meteo.com/), [Copernicus Sentinel](https://dataspace.copernicus.eu/), [NASA GPM](https://gpm.nasa.gov/), [GloFAS](https://www.globalfloods.eu/)

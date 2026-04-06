@@ -1,261 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Methodology — FloodKH</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology — FloodKH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="page-container">
 
-    <!-- Header -->
-    <header class="header">
-      <div class="header-left">
-        <a href="index.html" class="logo" style="text-decoration:none;">
-          <svg class="logo-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle cx="14" cy="14" r="13" stroke="#3b82f6" stroke-width="2" fill="none"/>
-            <path d="M8 18 C8 14, 10 10, 14 8 C18 10, 20 14, 20 18" stroke="#3b82f6" stroke-width="2" fill="rgba(59,130,246,0.15)"/>
-            <circle cx="14" cy="14" r="3" fill="#3b82f6"/>
-          </svg>
-          <span class="logo-text">Flood<span class="logo-accent">KH</span></span>
-        </a>
-      </div>
-      <nav class="header-nav">
-        <a href="index.html" class="nav-link">Map</a>
-        <a href="index.html#dashboard" class="nav-link">Dashboard</a>
-        <a href="methodology.html" class="nav-link active">Methodology</a>
-      </nav>
-      <div class="header-right">
-        <a href="index.html" class="nav-link" style="font-size:0.8rem;">&larr; Back to Map</a>
-      </div>
+    <header>
+        <div class="header-brand">
+            <h1>FloodKH</h1>
+            <span class="header-subtitle">Methodology</span>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-btn">Map</a>
+            <a href="methodology.html" class="nav-btn active">Methodology</a>
+        </nav>
+        <div class="header-controls"><span></span></div>
     </header>
 
-    <!-- Content -->
-    <div class="page-content">
-      <h1>Methodology</h1>
-      <p>FloodKH uses a multi-factor scoring system to assess flood risk across 25 monitoring locations in Cambodia.
-        This page describes the classification system, data sources, and known limitations.</p>
+    <div class="methodology-content">
+        <h2>Flood Risk Classification Methodology</h2>
+        <p>FloodKH uses a deterministic, rule-based scoring system that combines multiple data sources into a composite risk score (0-100) for each of Phnom Penh's 14 districts.</p>
 
-      <h2>Overview</h2>
-      <p>Each location is evaluated every 6 hours using the latest meteorological and hydrological data.
-        A composite <strong>risk score</strong> (0&ndash;100) is calculated from multiple weighted features,
-        then mapped to a <strong>risk level</strong> classification.</p>
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> FloodKH is an independent monitoring tool for informational purposes only. It is NOT an official warning system. Always follow guidance from the National Committee for Disaster Management (NCDM) and local authorities.
+        </div>
 
-      <h2>Risk Level Thresholds</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Risk Level</th>
-            <th>Score Range</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="risk-badge low">LOW</span></td>
-            <td>0 &ndash; 29</td>
-            <td>Normal conditions. No significant flood risk expected.</td>
-          </tr>
-          <tr>
-            <td><span class="risk-badge moderate">MODERATE</span></td>
-            <td>30 &ndash; 49</td>
-            <td>Elevated conditions. Localized flooding possible in low-lying areas.</td>
-          </tr>
-          <tr>
-            <td><span class="risk-badge high">HIGH</span></td>
-            <td>50 &ndash; 74</td>
-            <td>Significant flood risk. Flooding expected in vulnerable areas.</td>
-          </tr>
-          <tr>
-            <td><span class="risk-badge critical">CRITICAL</span></td>
-            <td>75 &ndash; 100</td>
-            <td>Severe flood risk. Widespread flooding likely. Immediate action recommended.</td>
-          </tr>
-        </tbody>
-      </table>
+        <h2>Alert Levels</h2>
+        <table>
+            <thead><tr><th>Level</th><th>Label</th><th>Score</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td><span class="level-indicator" style="background:#22c55e"></span>0</td><td>NORMAL</td><td>0-20</td><td>No flood risk. Normal conditions.</td></tr>
+                <tr><td><span class="level-indicator" style="background:#eab308"></span>1</td><td>WATCH</td><td>21-45</td><td>Elevated conditions. Heavy rain expected or soil saturating.</td></tr>
+                <tr><td><span class="level-indicator" style="background:#f97316"></span>2</td><td>WARNING</td><td>46-70</td><td>High flood risk. Flooding likely in low-lying areas.</td></tr>
+                <tr><td><span class="level-indicator" style="background:#ef4444"></span>3</td><td>EMERGENCY</td><td>71-100</td><td>Critical flood risk. Flooding imminent or active.</td></tr>
+            </tbody>
+        </table>
 
-      <h2>Scoring Features</h2>
-      <p>The risk score is computed as a weighted sum of the following features, each normalized to a 0&ndash;100 sub-score:</p>
+        <h2>Scoring Components</h2>
 
-      <h3>1. Rainfall &mdash; 24 Hour (Weight: 15%)</h3>
-      <table>
-        <thead><tr><th>Rainfall (mm)</th><th>Points</th></tr></thead>
-        <tbody>
-          <tr><td>0 &ndash; 10</td><td>0 &ndash; 10</td></tr>
-          <tr><td>10 &ndash; 30</td><td>10 &ndash; 40</td></tr>
-          <tr><td>30 &ndash; 60</td><td>40 &ndash; 70</td></tr>
-          <tr><td>60 &ndash; 100</td><td>70 &ndash; 90</td></tr>
-          <tr><td>&gt; 100</td><td>90 &ndash; 100</td></tr>
-        </tbody>
-      </table>
+        <h3>1. Rainfall Score (max 35 pts)</h3>
+        <table>
+            <thead><tr><th>7-Day Cumulative (mm)</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>&lt; 30</td><td>0</td></tr><tr><td>30-80</td><td>5</td></tr>
+                <tr><td>80-150</td><td>12</td></tr><tr><td>150-250</td><td>20</td></tr><tr><td>&gt; 250</td><td>25</td></tr>
+            </tbody>
+        </table>
+        <table>
+            <thead><tr><th>72h Forecast Total (mm)</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>&lt; 20</td><td>0</td></tr><tr><td>20-50</td><td>3</td></tr>
+                <tr><td>50-100</td><td>6</td></tr><tr><td>&gt; 100</td><td>10</td></tr>
+            </tbody>
+        </table>
+        <p>Flash flood bonus: +5 pts if any hourly forecast exceeds 30 mm/h.</p>
 
-      <h3>2. Rainfall &mdash; 3 Day Accumulation (Weight: 15%)</h3>
-      <p>Cumulative rainfall over 72 hours captures sustained precipitation events that saturate the ground
-        and overwhelm drainage systems. Scoring follows a similar tiered approach scaled for 3-day totals.</p>
+        <h3>2. Soil Moisture Score (max 15 pts)</h3>
+        <table>
+            <thead><tr><th>Soil Moisture (0-7cm)</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>&lt; 0.30</td><td>0</td></tr><tr><td>0.30-0.50</td><td>3</td></tr>
+                <tr><td>0.50-0.70</td><td>7</td></tr><tr><td>0.70-0.85</td><td>11</td></tr><tr><td>&gt; 0.85</td><td>15</td></tr>
+            </tbody>
+        </table>
+        <p>+3 pts if soil moisture trend is rising over past 48h.</p>
 
-      <h3>3. Rainfall &mdash; 7 Day Accumulation (Weight: 10%)</h3>
-      <p>Longer-term rainfall context. High 7-day totals indicate already-wet conditions prone to additional flooding.</p>
+        <h3>3. River Discharge Score (max 20 pts)</h3>
+        <table>
+            <thead><tr><th>Discharge Ratio (current/avg)</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>&lt; 1.0</td><td>0</td></tr><tr><td>1.0-1.3</td><td>4</td></tr>
+                <tr><td>1.3-1.6</td><td>9</td></tr><tr><td>1.6-2.0</td><td>15</td></tr><tr><td>&gt; 2.0</td><td>20</td></tr>
+            </tbody>
+        </table>
+        <p>+5 pts during Jun-Oct when Tonle Sap reverse flow is active.</p>
 
-      <h3>4. Rainfall Forecast &mdash; 3 Day (Weight: 15%)</h3>
-      <p>Predicted rainfall from weather models for the next 72 hours. This is the primary forward-looking indicator,
-        allowing the system to warn of impending risk increases.</p>
+        <h3>4. Satellite Score (max 15 pts)</h3>
+        <table>
+            <thead><tr><th>Flood Fraction (%)</th><th>Points</th></tr></thead>
+            <tbody>
+                <tr><td>&lt; 2%</td><td>0</td></tr><tr><td>2-5%</td><td>4</td></tr>
+                <tr><td>5-10%</td><td>8</td></tr><tr><td>10-20%</td><td>12</td></tr><tr><td>&gt; 20%</td><td>15</td></tr>
+            </tbody>
+        </table>
+        <p>Currently simulated from rainfall data. Real Sentinel-1 SAR integration planned.</p>
 
-      <h3>5. Soil Moisture (Weight: 15%)</h3>
-      <table>
-        <thead><tr><th>Soil Moisture (%)</th><th>Points</th></tr></thead>
-        <tbody>
-          <tr><td>0 &ndash; 30%</td><td>0 &ndash; 15</td></tr>
-          <tr><td>30 &ndash; 50%</td><td>15 &ndash; 40</td></tr>
-          <tr><td>50 &ndash; 70%</td><td>40 &ndash; 70</td></tr>
-          <tr><td>70 &ndash; 85%</td><td>70 &ndash; 90</td></tr>
-          <tr><td>&gt; 85%</td><td>90 &ndash; 100</td></tr>
-        </tbody>
-      </table>
-      <p>Saturated soil cannot absorb additional rainfall, leading to increased surface runoff and flood risk.</p>
+        <h3>5. District Vulnerability (max 15 pts)</h3>
+        <p>Static score: drainage quality (0-12 pts) + flood history (0-3 pts) + low elevation bonus (+2 if &lt;10m).</p>
 
-      <h3>6. River Discharge Ratio (Weight: 20%)</h3>
-      <p>Current river discharge compared to the historical average for the same period. This is the highest-weighted
-        feature because river levels are the most direct indicator of flooding.</p>
-      <table>
-        <thead><tr><th>Discharge / Average Ratio</th><th>Points</th></tr></thead>
-        <tbody>
-          <tr><td>&lt; 0.8</td><td>0 &ndash; 5</td></tr>
-          <tr><td>0.8 &ndash; 1.0</td><td>5 &ndash; 15</td></tr>
-          <tr><td>1.0 &ndash; 1.3</td><td>15 &ndash; 40</td></tr>
-          <tr><td>1.3 &ndash; 1.8</td><td>40 &ndash; 70</td></tr>
-          <tr><td>1.8 &ndash; 2.5</td><td>70 &ndash; 90</td></tr>
-          <tr><td>&gt; 2.5</td><td>90 &ndash; 100</td></tr>
-        </tbody>
-      </table>
+        <h2>72-Hour Prediction</h2>
+        <p>Future risk estimated by replacing observations with forecasts. Soil moisture extrapolated at +0.05/day (rising) or -0.03/day (falling). Confidence: <strong>High</strong> (T+24h), <strong>Medium</strong> (T+48h), <strong>Low</strong> (T+72h). Uncertainty widens 10% per step.</p>
 
-      <h3>7. Elevation Modifier (Weight: 10%)</h3>
-      <p>Lower elevations are more vulnerable to flooding. Locations below 15m receive a higher modifier,
-        while those above 100m receive a reduced modifier. This is a static factor based on location geography.</p>
+        <h2>Data Sources</h2>
+        <table>
+            <thead><tr><th>Source</th><th>Provides</th><th>Status</th><th>Frequency</th></tr></thead>
+            <tbody>
+                <tr><td>Open-Meteo</td><td>Precipitation, soil moisture, forecasts</td><td>Live</td><td>6 hours</td></tr>
+                <tr><td>Open-Meteo Flood</td><td>River discharge (GloFAS)</td><td>Live</td><td>Daily</td></tr>
+                <tr><td>Sentinel-1 SAR</td><td>Water extent</td><td>Stub</td><td>~6 days</td></tr>
+                <tr><td>Sentinel-2</td><td>NDWI water index</td><td>Stub</td><td>~5 days</td></tr>
+                <tr><td>NASA GPM IMERG</td><td>Satellite rainfall</td><td>Stub</td><td>30 min</td></tr>
+            </tbody>
+        </table>
 
-      <h2>Contributing Factors</h2>
-      <p>In addition to the numeric score, the system identifies qualitative contributing factors displayed
-        in each location's detail popup:</p>
-      <ul>
-        <li><strong>Heavy recent rainfall</strong> &mdash; 24h rainfall exceeds 30mm</li>
-        <li><strong>Sustained rainfall</strong> &mdash; 7-day rainfall exceeds 100mm</li>
-        <li><strong>Saturated soil</strong> &mdash; Soil moisture above 65%</li>
-        <li><strong>River above average</strong> &mdash; Discharge ratio exceeds 1.3x</li>
-        <li><strong>Heavy forecast</strong> &mdash; 3-day forecast exceeds 60mm</li>
-        <li><strong>Low elevation</strong> &mdash; Location below 15m elevation</li>
-        <li><strong>Urban flooding risk</strong> &mdash; Dense urban area with impervious surfaces</li>
-        <li><strong>Confluence of rivers</strong> &mdash; Located at major river junctions</li>
-      </ul>
-
-      <h2>Data Sources</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Source</th>
-            <th>Update Frequency</th>
-            <th>Resolution</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Rainfall (observed)</td>
-            <td>Open-Meteo API (ERA5 reanalysis)</td>
-            <td>Every 6 hours</td>
-            <td>~25 km</td>
-          </tr>
-          <tr>
-            <td>Rainfall (satellite)</td>
-            <td>NASA GPM IMERG</td>
-            <td>Every 30 minutes (late run: 6h delay)</td>
-            <td>~10 km</td>
-          </tr>
-          <tr>
-            <td>Rainfall forecast</td>
-            <td>Open-Meteo (GFS / ECMWF blend)</td>
-            <td>Every 6 hours</td>
-            <td>~25 km</td>
-          </tr>
-          <tr>
-            <td>Soil moisture</td>
-            <td>Open-Meteo (ERA5-Land)</td>
-            <td>Daily</td>
-            <td>~9 km</td>
-          </tr>
-          <tr>
-            <td>River discharge</td>
-            <td>GloFAS (Copernicus)</td>
-            <td>Daily</td>
-            <td>~10 km</td>
-          </tr>
-          <tr>
-            <td>Elevation</td>
-            <td>SRTM / static configuration</td>
-            <td>Static</td>
-            <td>~30 m</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Update Schedule</h2>
-      <p>The system runs automated data collection and scoring every <strong>6 hours</strong> via GitHub Actions:</p>
-      <ul>
-        <li>00:00 UTC &mdash; Full update with all data sources</li>
-        <li>06:00 UTC &mdash; Full update</li>
-        <li>12:00 UTC &mdash; Full update</li>
-        <li>18:00 UTC &mdash; Full update</li>
-      </ul>
-      <p>Results are published to this static site within minutes of each run.</p>
-
-      <h2>Limitations and Disclaimers</h2>
-      <div class="warning">
-        <strong>Important:</strong> FloodKH is an experimental monitoring tool and should NOT be used as the sole
-        basis for evacuation or emergency response decisions. Always follow official guidance from the
-        Cambodia National Committee for Disaster Management (NCDM).
-      </div>
-      <ul>
-        <li><strong>Spatial resolution:</strong> Data is gridded at 10&ndash;25 km resolution. Localized flooding
-          from intense storms may not be captured.</li>
-        <li><strong>Temporal lag:</strong> Satellite rainfall products have a 1&ndash;6 hour delay.
-          Real-time ground observations are not incorporated.</li>
-        <li><strong>River discharge:</strong> GloFAS provides modeled (not observed) discharge.
-          Actual river levels may differ significantly.</li>
-        <li><strong>Urban flooding:</strong> The system does not model urban drainage infrastructure,
-          road flooding, or localized ponding.</li>
-        <li><strong>Flash floods:</strong> Rapid-onset flash floods in mountainous areas may not be
-          adequately predicted by this system.</li>
-        <li><strong>Tonle Sap dynamics:</strong> The unique reverse-flow dynamics of Tonle Sap Lake
-          are not explicitly modeled.</li>
-        <li><strong>No ground truth:</strong> The system is not validated against actual flood extent
-          observations and should be considered experimental.</li>
-      </ul>
-
-      <div class="note">
-        <strong>Open Source:</strong> This project is open source and contributions are welcome.
-        The scoring methodology can be improved with local knowledge, ground truth data, and
-        more sophisticated hydrological modeling.
-      </div>
-
-      <h2>References</h2>
-      <ul>
-        <li>Open-Meteo API: <a href="https://open-meteo.com" target="_blank">https://open-meteo.com</a></li>
-        <li>NASA GPM: <a href="https://gpm.nasa.gov" target="_blank">https://gpm.nasa.gov</a></li>
-        <li>GloFAS: <a href="https://www.globalfloods.eu" target="_blank">https://www.globalfloods.eu</a></li>
-        <li>Cambodia NCDM: <a href="https://www.ncdm.gov.kh" target="_blank">https://www.ncdm.gov.kh</a></li>
-      </ul>
+        <h2>Limitations</h2>
+        <ul style="color:var(--text-secondary);margin:12px 0 12px 24px;">
+            <li>District boundaries are approximate</li>
+            <li>Satellite sources currently simulated</li>
+            <li>Urban microflooding not captured</li>
+            <li>Predictions beyond 24h carry significant uncertainty</li>
+            <li>Not a replacement for official flood warnings</li>
+        </ul>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer" style="position:relative;">
-      <span>Built by <strong>Convergence</strong></span>
-      <span class="footer-sep">&bull;</span>
-      <span>Data: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a>, <a href="https://gpm.nasa.gov" target="_blank">NASA GPM</a>, <a href="https://www.globalfloods.eu" target="_blank">GloFAS</a></span>
+    <footer>
+        <span>Built by <strong>Convergence</strong></span>
+        <span>Data: Open-Meteo, Copernicus Sentinel, NASA GPM, GloFAS</span>
     </footer>
-
-  </div>
 </body>
 </html>

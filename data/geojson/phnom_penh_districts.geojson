@@ -1,0 +1,117 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "id": "chamkarmon", "name": "Chamkarmon", "name_km": "ចំការមន" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.920,11.560],[104.940,11.560],[104.940,11.540],[104.920,11.540],[104.920,11.560]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "daun_penh", "name": "Daun Penh", "name_km": "ដូនពេញ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.910,11.585],[104.935,11.585],[104.935,11.565],[104.910,11.565],[104.910,11.585]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "prampir_makara", "name": "Prampir Makara", "name_km": "ប្រាំពីរមករា" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.905,11.575],[104.920,11.575],[104.920,11.555],[104.905,11.555],[104.905,11.575]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "tuol_kork", "name": "Tuol Kork", "name_km": "ទួលគោក" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.885,11.595],[104.915,11.595],[104.915,11.570],[104.885,11.570],[104.885,11.595]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "dangkor", "name": "Dangkor", "name_km": "ដង្កោ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.830,11.510],[104.880,11.510],[104.880,11.450],[104.830,11.450],[104.830,11.510]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "mean_chey", "name": "Mean Chey", "name_km": "មានជ័យ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.930,11.540],[104.965,11.540],[104.965,11.500],[104.930,11.500],[104.930,11.540]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "russey_keo", "name": "Russey Keo", "name_km": "ឫស្សីកែវ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.870,11.625],[104.910,11.625],[104.910,11.595],[104.870,11.595],[104.870,11.625]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "sen_sok", "name": "Sen Sok", "name_km": "សែនសុខ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.830,11.610],[104.870,11.610],[104.870,11.575],[104.830,11.575],[104.830,11.610]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "pou_senchey", "name": "Pou Senchey", "name_km": "ពោធិ៍សែនជ័យ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.830,11.570],[104.870,11.570],[104.870,11.535],[104.830,11.535],[104.830,11.570]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "chroy_changvar", "name": "Chroy Changvar", "name_km": "ជ្រោយចង្វារ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.925,11.645],[104.955,11.645],[104.955,11.595],[104.935,11.585],[104.925,11.600],[104.925,11.645]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "prek_pnov", "name": "Prek Pnov", "name_km": "ព្រែកព្នៅ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.845,11.680],[104.895,11.680],[104.895,11.635],[104.845,11.635],[104.845,11.680]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "chbar_ampov", "name": "Chbar Ampov", "name_km": "ច្បារអំពៅ" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.955,11.530],[104.990,11.530],[104.990,11.490],[104.955,11.490],[104.955,11.530]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "kamboul", "name": "Kamboul", "name_km": "កំបូល" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.800,11.535],[104.840,11.535],[104.840,11.485],[104.800,11.485],[104.800,11.535]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "id": "boeng_keng_kang", "name": "Boeng Keng Kang", "name_km": "បឹងកេងកង" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[104.915,11.555],[104.935,11.555],[104.935,11.535],[104.915,11.535],[104.915,11.555]]]
+      }
+    }
+  ]
+}

@@ -1,121 +1,145 @@
 """
-FloodKH -- Open-Meteo API client.
-
-Fetches weather forecast/historical data and river-discharge estimates from
-the free Open-Meteo APIs.  No API key required.
-
-Endpoints used:
-    https://api.open-meteo.com/v1/forecast   (weather)
-    https://flood-api.open-meteo.com/v1/flood (river discharge)
+Open-Meteo Weather API client.
+Primary data source — free, no authentication required.
+https://open-meteo.com/en/docs
 """
-
 import requests
+from datetime import datetime, timezone
 
-WEATHER_URL = "https://api.open-meteo.com/v1/forecast"
-FLOOD_URL = "https://flood-api.open-meteo.com/v1/flood"
-
-# Timeout for every HTTP request (seconds).
-REQUEST_TIMEOUT = 15
+FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+HISTORY_URL = "https://archive-api.open-meteo.com/v1/archive"
 
 
-def fetch_weather_data(lat: float, lon: float) -> dict | None:
-    """Fetch rainfall and soil-moisture data for a coordinate.
-
-    Queries Open-Meteo for 7 past days + 3-day forecast of daily
-    precipitation and surface soil moisture.
-
-    Returns
-    -------
-    dict with keys:
-        rainfall_24h   : float  -- precipitation in last 24 h (mm)
-        rainfall_3d    : float  -- cumulative precipitation, last 3 days (mm)
-        rainfall_7d    : float  -- cumulative precipitation, last 7 days (mm)
-        forecast_3d    : float  -- forecasted precipitation, next 3 days (mm)
-        soil_moisture  : float  -- latest soil moisture 0-7 cm (m3/m3, 0-1)
-    None on any failure.
+def fetch_weather_data(lat, lon):
     """
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "daily": "precipitation_sum",
-        "hourly": "soil_moisture_0_to_1cm",
-        "past_days": 7,
-        "forecast_days": 3,
-        "timezone": "Asia/Phnom_Penh",
-    }
+    Fetch current + forecast weather data for a location.
 
+    Returns dict with:
+    - rainfall_24h_mm: observed last 24h
+    - rainfall_3d_mm: observed last 3 days
+    - rainfall_7d_mm: observed last 7 days
+    - forecast_24h_mm: forecast next 24h
+    - forecast_48h_mm: forecast next 24-48h
+    - forecast_72h_mm: forecast next 48-72h
+    - rainfall_intensity_max_mmh: peak hourly rate in forecast
+    - soil_moisture_shallow: 0-7cm fraction
+    - soil_moisture_deep: 7-28cm fraction
+    - soil_saturation_trend: "rising", "stable", or "falling"
+    - hourly_forecast: list of {time, precipitation_mm} for 72h
+
+    Returns None on failure.
+    """
     try:
-        resp = requests.get(WEATHER_URL, params=params, timeout=REQUEST_TIMEOUT)
-        resp.raise_for_status()
-        data = resp.json()
-    except (requests.RequestException, ValueError) as exc:
-        print(f"  [open_meteo] weather request failed for ({lat}, {lon}): {exc}")
-        return None
-
-    try:
-        daily_precip = data["daily"]["precipitation_sum"]  # list of floats
-
-        # daily_precip covers past_days (7) + forecast_days (3) = 10 entries.
-        # Index 0..6 = past 7 days (oldest first), 7..9 = forecast 3 days.
-        past_7 = [v if v is not None else 0.0 for v in daily_precip[:7]]
-        forecast = [v if v is not None else 0.0 for v in daily_precip[7:10]]
-
-        rainfall_24h = past_7[-1]            # most recent full day
-        rainfall_3d = sum(past_7[-3:])        # last 3 days
-        rainfall_7d = sum(past_7)             # last 7 days
-        forecast_3d = sum(forecast)           # next 3 days
-
-        # Soil moisture -- grab latest available hourly value.
-        soil_values = data.get("hourly", {}).get("soil_moisture_0_to_1cm", [])
-        soil_moisture = None
-        for v in reversed(soil_values):
-            if v is not None:
-                soil_moisture = v
-                break
-        if soil_moisture is None:
-            soil_moisture = 0.0
-
-        return {
-            "rainfall_24h": round(rainfall_24h, 2),
-            "rainfall_3d": round(rainfall_3d, 2),
-            "rainfall_7d": round(rainfall_7d, 2),
-            "forecast_3d": round(forecast_3d, 2),
-            "soil_moisture": round(soil_moisture, 3),
+        params = {
+            "latitude": lat,
+            "longitude": lon,
+            "hourly": "precipitation,rain,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm",
+            "past_days": 14,
+            "forecast_days": 7,
+            "timezone": "UTC",
         }
 
-    except (KeyError, IndexError, TypeError) as exc:
-        print(f"  [open_meteo] failed to parse weather response: {exc}")
-        return None
-
-
-def fetch_river_discharge(lat: float, lon: float) -> float | None:
-    """Fetch current river discharge estimate from Open-Meteo Flood API.
-
-    Returns the most recent daily discharge value (m3/s), or None on failure.
-    """
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "daily": "river_discharge",
-        "past_days": 7,
-        "forecast_days": 1,
-    }
-
-    try:
-        resp = requests.get(FLOOD_URL, params=params, timeout=REQUEST_TIMEOUT)
+        resp = requests.get(FORECAST_URL, params=params, timeout=30)
         resp.raise_for_status()
         data = resp.json()
-    except (requests.RequestException, ValueError) as exc:
-        print(f"  [open_meteo] flood request failed for ({lat}, {lon}): {exc}")
-        return None
 
-    try:
-        discharge_values = data["daily"]["river_discharge"]
-        # Return the most recent non-None value.
-        for v in reversed(discharge_values):
-            if v is not None:
-                return round(v, 2)
+        hourly = data.get("hourly", {})
+        times = hourly.get("time", [])
+        precip = hourly.get("precipitation", [])
+        soil_shallow = hourly.get("soil_moisture_0_to_7cm", [])
+        soil_deep = hourly.get("soil_moisture_7_to_28cm", [])
+
+        if not times or not precip:
+            print("[Open-Meteo] No hourly data returned")
+            return None
+
+        # Find the index of "now" — the last timestamp that is <= current UTC time
+        now = datetime.now(timezone.utc)
+        now_str = now.strftime("%Y-%m-%dT%H:%M")
+
+        now_idx = 0
+        for i, t in enumerate(times):
+            if t <= now_str:
+                now_idx = i
+            else:
+                break
+
+        # Helper to safely sum a slice of precipitation values
+        def safe_sum(values, start, end):
+            sliced = values[max(start, 0):end]
+            return round(sum(v for v in sliced if v is not None), 2)
+
+        # --- Observed rainfall ---
+        rainfall_24h = safe_sum(precip, now_idx - 23, now_idx + 1)
+        rainfall_3d = safe_sum(precip, now_idx - 71, now_idx + 1)
+        rainfall_7d = safe_sum(precip, now_idx - 167, now_idx + 1)
+
+        # --- Forecast rainfall ---
+        forecast_24h = safe_sum(precip, now_idx + 1, now_idx + 25)
+        forecast_48h = safe_sum(precip, now_idx + 25, now_idx + 49)
+        forecast_72h = safe_sum(precip, now_idx + 49, now_idx + 73)
+
+        # --- Peak hourly intensity in forecast period ---
+        forecast_slice = precip[now_idx + 1 : now_idx + 73]
+        forecast_valid = [v for v in forecast_slice if v is not None]
+        rainfall_intensity_max = round(max(forecast_valid), 2) if forecast_valid else 0.0
+
+        # --- Soil moisture (latest available value) ---
+        def latest_value(values, up_to_idx):
+            for i in range(min(up_to_idx, len(values) - 1), -1, -1):
+                if values[i] is not None:
+                    return round(values[i], 4)
+            return None
+
+        sm_shallow = latest_value(soil_shallow, now_idx)
+        sm_deep = latest_value(soil_deep, now_idx)
+
+        # --- Soil saturation trend ---
+        # Compare average of last 72h vs previous 72h for shallow moisture
+        def avg_window(values, start, end):
+            window = values[max(start, 0):end]
+            valid = [v for v in window if v is not None]
+            return sum(valid) / len(valid) if valid else None
+
+        recent_avg = avg_window(soil_shallow, now_idx - 71, now_idx + 1)
+        prior_avg = avg_window(soil_shallow, now_idx - 143, now_idx - 71)
+
+        if recent_avg is not None and prior_avg is not None:
+            diff = recent_avg - prior_avg
+            if diff > 0.005:
+                soil_trend = "rising"
+            elif diff < -0.005:
+                soil_trend = "falling"
+            else:
+                soil_trend = "stable"
+        else:
+            soil_trend = "stable"
+
+        # --- Hourly forecast for next 72h ---
+        hourly_forecast = []
+        for i in range(now_idx + 1, min(now_idx + 73, len(times))):
+            hourly_forecast.append({
+                "time": times[i],
+                "precipitation_mm": precip[i] if precip[i] is not None else 0.0,
+            })
+
+        return {
+            "rainfall_24h_mm": rainfall_24h,
+            "rainfall_3d_mm": rainfall_3d,
+            "rainfall_7d_mm": rainfall_7d,
+            "forecast_24h_mm": forecast_24h,
+            "forecast_48h_mm": forecast_48h,
+            "forecast_72h_mm": forecast_72h,
+            "rainfall_intensity_max_mmh": rainfall_intensity_max,
+            "soil_moisture_shallow": sm_shallow,
+            "soil_moisture_deep": sm_deep,
+            "soil_saturation_trend": soil_trend,
+            "hourly_forecast": hourly_forecast,
+        }
+
+    except requests.exceptions.RequestException as e:
+        print(f"[Open-Meteo] Request failed: {e}")
         return None
-    except (KeyError, IndexError, TypeError) as exc:
-        print(f"  [open_meteo] failed to parse flood response: {exc}")
+    except Exception as e:
+        print(f"[Open-Meteo] Error processing data: {e}")
         return None

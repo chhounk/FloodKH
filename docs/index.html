@@ -1,158 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FloodKH — Cambodia Flood Monitor</title>
-  <meta name="description" content="Real-time flood risk monitoring for Cambodia. Track rainfall, river discharge, and flood risk across 25 locations.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloodKH — Phnom Penh Flood Monitor</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="">
 
-  <!-- Google Fonts: Noto Sans Khmer -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Noto Sans Khmer -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-  <!-- Local CSS -->
-  <link rel="stylesheet" href="css/style.css">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="header-left">
-      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <rect y="3" width="20" height="2" rx="1" fill="currentColor"/>
-          <rect y="9" width="20" height="2" rx="1" fill="currentColor"/>
-          <rect y="15" width="20" height="2" rx="1" fill="currentColor"/>
-        </svg>
-      </button>
-      <div class="logo">
-        <svg class="logo-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="14" cy="14" r="13" stroke="#3b82f6" stroke-width="2" fill="none"/>
-          <path d="M8 18 C8 14, 10 10, 14 8 C18 10, 20 14, 20 18" stroke="#3b82f6" stroke-width="2" fill="rgba(59,130,246,0.15)"/>
-          <circle cx="14" cy="14" r="3" fill="#3b82f6"/>
-        </svg>
-        <span class="logo-text">Flood<span class="logo-accent">KH</span></span>
-      </div>
-    </div>
-    <nav class="header-nav">
-      <a href="#" class="nav-link active" data-view="map" data-i18n="nav_map">Map</a>
-      <a href="#" class="nav-link" data-view="dashboard" data-i18n="nav_dashboard">Dashboard</a>
-      <a href="methodology.html" class="nav-link" data-i18n="nav_methodology">Methodology</a>
-    </nav>
-    <div class="header-right">
-      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-        <span class="lang-label" id="langLabel">EN</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-content">
-      <!-- Summary Cards -->
-      <div class="summary-section">
-        <h2 class="section-title" data-i18n="national_summary">National Summary</h2>
-        <div class="summary-grid" id="summaryGrid">
-          <div class="summary-card card-critical">
-            <div class="card-count" id="countCritical">0</div>
-            <div class="card-label" data-i18n="critical">Critical</div>
-          </div>
-          <div class="summary-card card-high">
-            <div class="card-count" id="countHigh">0</div>
-            <div class="card-label" data-i18n="high">High</div>
-          </div>
-          <div class="summary-card card-moderate">
-            <div class="card-count" id="countModerate">0</div>
-            <div class="card-label" data-i18n="moderate">Moderate</div>
-          </div>
-          <div class="summary-card card-low">
-            <div class="card-count" id="countLow">0</div>
-            <div class="card-label" data-i18n="low">Low</div>
-          </div>
+    <header>
+        <div class="header-brand">
+            <h1>FloodKH</h1>
+            <span class="header-subtitle" data-i18n="subtitle">Phnom Penh Flood Monitor</span>
         </div>
-      </div>
-
-      <!-- Location Table -->
-      <div class="table-section">
-        <h2 class="section-title" data-i18n="locations">Locations</h2>
-        <div class="table-wrapper">
-          <table class="location-table" id="locationTable">
-            <thead>
-              <tr>
-                <th class="sortable" data-sort="name" data-i18n="th_location">Location</th>
-                <th class="sortable" data-sort="risk_level" data-i18n="th_risk">Risk</th>
-                <th class="sortable" data-sort="risk_score" data-i18n="th_score">Score</th>
-                <th class="sortable" data-sort="rainfall_24h_mm" data-i18n="th_rain24h">Rain 24h</th>
-                <th class="sortable" data-sort="forecast_3d_mm" data-i18n="th_forecast">Forecast</th>
-              </tr>
-            </thead>
-            <tbody id="locationTableBody">
-            </tbody>
-          </table>
+        <nav>
+            <button class="nav-btn active" data-view="map" data-i18n="nav_map">Map</button>
+            <button class="nav-btn" data-view="dashboard" data-i18n="nav_dashboard">Dashboard</button>
+            <a href="methodology.html" class="nav-btn" data-i18n="nav_methodology">Methodology</a>
+        </nav>
+        <div class="header-controls">
+            <button id="lang-toggle" class="lang-btn">ខ្មែរ</button>
+            <span class="last-updated" data-i18n="last_updated">Last updated:</span>
+            <span id="update-time">--</span>
         </div>
-      </div>
+    </header>
 
-      <!-- Predictions -->
-      <div class="prediction-section" id="predictionSection">
-        <h2 class="section-title" data-i18n="predictions">3-Day Forecast</h2>
-        <div id="predictionCards"></div>
-      </div>
+    <main>
+        <div id="sidebar" class="sidebar">
+            <!-- Mobile drag handle -->
+            <div class="sidebar-handle" id="sidebar-toggle">
+                <span class="handle-bar"></span>
+            </div>
 
-      <!-- Last Updated -->
-      <div class="last-updated">
-        <span data-i18n="last_updated">Last Updated</span>:
-        <span id="lastUpdated">--</span>
-      </div>
-    </div>
-  </aside>
+            <!-- Summary cards -->
+            <div class="summary-cards">
+                <div class="summary-card level-0">
+                    <span class="card-count" id="count-normal">0</span>
+                    <span data-i18n="normal">Normal</span>
+                </div>
+                <div class="summary-card level-1">
+                    <span class="card-count" id="count-watch">0</span>
+                    <span data-i18n="watch">Watch</span>
+                </div>
+                <div class="summary-card level-2">
+                    <span class="card-count" id="count-warning">0</span>
+                    <span data-i18n="warning">Warning</span>
+                </div>
+                <div class="summary-card level-3">
+                    <span class="card-count" id="count-emergency">0</span>
+                    <span data-i18n="emergency">Emergency</span>
+                </div>
+            </div>
 
-  <!-- Sidebar Overlay (mobile) -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+            <!-- Timeline slider -->
+            <div class="timeline-section">
+                <h3 data-i18n="forecast_timeline">72-Hour Forecast</h3>
+                <div class="timeline-slider">
+                    <input type="range" id="time-slider" min="0" max="3" step="1" value="0">
+                    <div class="timeline-labels">
+                        <span class="active">Now</span>
+                        <span>+24h</span>
+                        <span>+48h</span>
+                        <span>+72h</span>
+                    </div>
+                </div>
+            </div>
 
-  <!-- Main Content -->
-  <main class="main-content" id="mainContent">
-    <!-- Map View -->
-    <div class="view-map active" id="viewMap">
-      <div id="map"></div>
-    </div>
+            <!-- District ranking -->
+            <div class="district-list">
+                <h3 data-i18n="highest_risk">Highest Risk Districts</h3>
+                <div id="district-ranking"></div>
+            </div>
 
-    <!-- Dashboard View -->
-    <div class="view-dashboard" id="viewDashboard">
-      <div class="dashboard-container">
-        <h2 class="section-title" data-i18n="dashboard_title">Monitoring Dashboard</h2>
-        <div class="dashboard-grid" id="dashboardGrid">
-          <!-- Dashboard charts rendered by JS -->
+            <!-- River gauge -->
+            <div class="river-section">
+                <h3 data-i18n="river_level">Mekong River Level</h3>
+                <div id="river-gauge"></div>
+            </div>
+
+            <!-- Data source status -->
+            <div class="source-status">
+                <h3 data-i18n="data_sources">Data Sources</h3>
+                <div id="source-indicators"></div>
+            </div>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="footer" id="footer">
-    <span>Built by <strong>Convergence</strong></span>
-    <span class="footer-sep">&bull;</span>
-    <span>Data: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a>, <a href="https://gpm.nasa.gov" target="_blank">NASA GPM</a>, <a href="https://www.globalfloods.eu" target="_blank">GloFAS</a></span>
-  </footer>
+        <div id="map-container"></div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <div id="dashboard-view" class="dashboard-view hidden">
+            <!-- Charts and detailed view rendered by dashboard.js -->
+        </div>
+    </main>
 
-  <!-- App JS -->
-  <script src="js/i18n.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/dashboard.js"></script>
-  <script src="js/app.js"></script>
+    <footer>
+        <span>Built by <strong>Convergence</strong></span>
+        <span>Data: Open-Meteo, Copernicus Sentinel, NASA GPM, GloFAS</span>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Local JS -->
+    <script src="js/i18n.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

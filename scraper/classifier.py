@@ -1,211 +1,276 @@
 """
-FloodKH -- Rule-based flood-risk classifier.
+FloodKH Classifier — Scores current flood risk for each Phnom Penh district.
 
-Scoring system
+Combines rainfall, soil moisture, river discharge, satellite data, and
+static district vulnerability into a 0-100 risk score mapped to 4 alert levels.
+
+Component breakdown (max 100):
+    Rainfall        max 35  (25 observation + 10 forecast, +5 flash-flood bonus)
+    Soil moisture   max 15  (12 base + 3 trend bonus)
+    River discharge max 20  (15 base + 5 Tonle Sap reversal bonus)
+    Satellite       max 15
+    Vulnerability   max 15  (12 drainage + 3 history, capped)
+
+Data contracts
 --------------
-The classifier converts raw hydro-meteorological observations into a single
-integer *risk score* and a human-readable *risk level*.
+weather_data : dict
+    rainfall_7d_mm, rainfall_3d_mm, rainfall_24h_mm,
+    forecast_24h_mm, forecast_48h_mm, forecast_72h_mm,
+    intensity_mm_h (current hourly rate),
+    soil_moisture (0-1), soil_moisture_deep (0-1),
+    soil_trend ("rising" | "falling" | "stable" | None)
 
-Weighted features and their point ranges:
+river_data : dict
+    discharge_ratio (current / long-term avg for the month),
+    tonle_sap_reverse (bool — is reversal active?)
 
-    Feature                       | Thresholds (value -> points)
-    ------------------------------|--------------------------------------
-    rainfall_24h (mm)             | 0-5->0, 5-20->5, 20-50->10, 50-100->20, >100->30
-    rainfall_3d  (mm)             | 0-10->0, 10-50->5, 50-100->15, 100-200->25, >200->35
-    rainfall_7d  (mm)             | 0-30->0, 30-100->5, 100-200->10, >200->20
-    forecast_3d  (mm)             | 0-10->0, 10-50->5, 50-100->15, >100->25
-    soil_moisture (0-1)           | <0.3->0, 0.3-0.5->5, 0.5-0.7->10, 0.7-0.85->15, >0.85->20
-    discharge_ratio (cur/avg)     | <0.8->0, 0.8-1.0->5, 1.0-1.3->10, 1.3-1.6->15, >1.6->25
-    elevation_m                   | >100->0, 50-100->5, 20-50->10, <20->15
-
-Modifiers applied *after* summing feature points:
-    - Wet season (June--November): total *= 1.2
-    - Mekong proximity > 0.7:     total += 10
-
-Classification thresholds (on final score):
-    LOW       0 -- 25
-    MODERATE  26 -- 50
-    HIGH      51 -- 75
-    CRITICAL  76+
+satellite_data : dict
+    flood_fraction_pct (% of district area flagged as inundated)
 """
 
-from datetime import datetime, timezone
+from __future__ import annotations
+
+from scraper.config import (
+    ALERT_LABELS,
+    ALERT_THRESHOLDS,
+    DISCHARGE_RATIO_THRESHOLDS,
+    DRAINAGE_QUALITY_SCORES,
+    FLOOD_FRACTION_THRESHOLDS,
+    FLOOD_HISTORY_MAX_BONUS,
+    FORECAST_72H_THRESHOLDS,
+    INTENSITY_FLASH_FLOOD_THRESHOLD,
+    LOW_ELEVATION_BONUS,
+    LOW_ELEVATION_THRESHOLD,
+    RAINFALL_7D_THRESHOLDS,
+    SOIL_MOISTURE_THRESHOLDS,
+    SOIL_TREND_RISING_BONUS,
+    TONLE_SAP_REVERSE_FLOW_BONUS,
+)
+from scraper.utils import clamp, safe_round, score_from_thresholds
 
 
 # ---------------------------------------------------------------------------
-# Individual scoring functions
+# Internal helpers
 # ---------------------------------------------------------------------------
 
-def _score_rainfall_24h(mm: float) -> int:
-    if mm > 100:
-        return 30
-    if mm > 50:
-        return 20
-    if mm > 20:
-        return 10
-    if mm > 5:
-        return 5
-    return 0
+def _safe_get(data: dict | None, key: str, default=None):
+    """Safely retrieve a value from a dict that may be None."""
+    if data is None:
+        return default
+    return data.get(key, default)
 
 
-def _score_rainfall_3d(mm: float) -> int:
-    if mm > 200:
-        return 35
-    if mm > 100:
-        return 25
-    if mm > 50:
-        return 15
-    if mm > 10:
-        return 5
-    return 0
+def _score_rainfall(weather_data: dict | None) -> tuple[int, list[str]]:
+    """Score rainfall component (max 35). Returns (score, factors)."""
+    factors: list[str] = []
+    rainfall_7d = _safe_get(weather_data, "rainfall_7d_mm")
+    forecast_72h_total = _compute_forecast_total(weather_data)
+    intensity = _safe_get(weather_data, "intensity_mm_h")
+
+    # 7-day accumulated rainfall (max 25)
+    obs_score = score_from_thresholds(rainfall_7d, RAINFALL_7D_THRESHOLDS)
+
+    # 72-hour forecast total (max 10)
+    fcst_score = score_from_thresholds(forecast_72h_total, FORECAST_72H_THRESHOLDS)
+
+    # Flash-flood intensity bonus (+5)
+    flash_bonus = 0
+    if intensity is not None and intensity >= INTENSITY_FLASH_FLOOD_THRESHOLD:
+        flash_bonus = 5
+        factors.append(f"Flash-flood intensity ({intensity:.0f} mm/h)")
+
+    total = min(obs_score + fcst_score + flash_bonus, 35)
+
+    # Build human-readable factors
+    if rainfall_7d is not None:
+        if obs_score >= 20:
+            factors.append(f"Heavy rainfall ({rainfall_7d:.0f} mm in 7 days)")
+        elif obs_score >= 12:
+            factors.append(f"Moderate rainfall ({rainfall_7d:.0f} mm in 7 days)")
+        elif obs_score == 0 and (forecast_72h_total or 0) < 20:
+            factors.append("Low rainfall")
+
+    if forecast_72h_total is not None and fcst_score >= 6:
+        factors.append(f"Heavy rain forecast ({forecast_72h_total:.0f} mm in 72 h)")
+
+    return total, factors
 
 
-def _score_rainfall_7d(mm: float) -> int:
-    if mm > 200:
-        return 20
-    if mm > 100:
-        return 10
-    if mm > 30:
-        return 5
-    return 0
+def _compute_forecast_total(weather_data: dict | None) -> float | None:
+    """Sum the 24/48/72 h forecast values, returning None if all are missing."""
+    vals = [
+        _safe_get(weather_data, "forecast_24h_mm"),
+        _safe_get(weather_data, "forecast_48h_mm"),
+        _safe_get(weather_data, "forecast_72h_mm"),
+    ]
+    present = [v for v in vals if v is not None]
+    return sum(present) if present else None
 
 
-def _score_forecast_3d(mm: float) -> int:
-    if mm > 100:
-        return 25
-    if mm > 50:
-        return 15
-    if mm > 10:
-        return 5
-    return 0
+def _score_soil(weather_data: dict | None) -> tuple[int, list[str]]:
+    """Score soil moisture component (max 15). Returns (score, factors)."""
+    factors: list[str] = []
+    sm = _safe_get(weather_data, "soil_moisture")
+    trend = _safe_get(weather_data, "soil_trend")
+
+    base = score_from_thresholds(sm, SOIL_MOISTURE_THRESHOLDS)
+    bonus = SOIL_TREND_RISING_BONUS if trend == "rising" else 0
+    total = min(base + bonus, 15)
+
+    if sm is not None:
+        if sm >= 0.85:
+            factors.append(f"Soil near saturation ({sm * 100:.0f}%)")
+        elif sm >= 0.7:
+            factors.append(f"Soil moisture elevated ({sm * 100:.0f}%)")
+        elif sm <= 0.3:
+            factors.append("Dry soil conditions")
+
+    if trend == "rising" and bonus > 0:
+        factors.append("Soil moisture trend rising")
+
+    return total, factors
 
 
-def _score_soil_moisture(sm: float) -> int:
-    if sm > 0.85:
-        return 20
-    if sm > 0.7:
-        return 15
-    if sm > 0.5:
-        return 10
-    if sm > 0.3:
-        return 5
-    return 0
+def _score_river(river_data: dict | None) -> tuple[int, list[str]]:
+    """Score river discharge component (max 20). Returns (score, factors)."""
+    factors: list[str] = []
+    ratio = _safe_get(river_data, "discharge_ratio")
+    reverse = _safe_get(river_data, "tonle_sap_reverse", False)
+
+    base = score_from_thresholds(ratio, DISCHARGE_RATIO_THRESHOLDS)
+    bonus = TONLE_SAP_REVERSE_FLOW_BONUS if reverse else 0
+    total = min(base + bonus, 20)
+
+    if ratio is not None:
+        if ratio >= 2.0:
+            factors.append(f"River discharge critical ({ratio:.1f}\u00d7 average)")
+        elif ratio >= 1.3:
+            factors.append(f"River discharge elevated ({ratio:.1f}\u00d7 average)")
+
+    if reverse:
+        factors.append("Tonle Sap reverse flow active")
+
+    return total, factors
 
 
-def _score_discharge_ratio(ratio: float) -> int:
-    if ratio > 1.6:
-        return 25
-    if ratio > 1.3:
-        return 15
-    if ratio > 1.0:
-        return 10
-    if ratio > 0.8:
-        return 5
-    return 0
+def _score_satellite(satellite_data: dict | None) -> tuple[int, list[str]]:
+    """Score satellite component (max 15). Returns (score, factors)."""
+    factors: list[str] = []
+    fraction = _safe_get(satellite_data, "flood_fraction_pct")
+
+    total = score_from_thresholds(fraction, FLOOD_FRACTION_THRESHOLDS)
+
+    if fraction is not None and fraction >= 5:
+        factors.append(f"Satellite detects flooding ({fraction:.1f}% of area)")
+
+    return total, factors
 
 
-def _score_elevation(elev_m: float) -> int:
-    if elev_m < 20:
-        return 15
-    if elev_m < 50:
-        return 10
-    if elev_m <= 100:
-        return 5
-    return 0
+def _score_vulnerability(district: dict) -> tuple[int, list[str]]:
+    """Score static district vulnerability (max 15). Returns (score, factors)."""
+    factors: list[str] = []
+
+    drainage = district.get("drainage_quality", 3)
+    history = district.get("flood_history_rating", 1)
+    elevation = district.get("elevation_m", 12)
+
+    drain_score = DRAINAGE_QUALITY_SCORES.get(drainage, 6)
+    history_bonus = round(FLOOD_HISTORY_MAX_BONUS * (history / 5))
+    elev_bonus = LOW_ELEVATION_BONUS if elevation < LOW_ELEVATION_THRESHOLD else 0
+
+    total = min(drain_score + history_bonus + elev_bonus, 15)
+
+    if drainage <= 2:
+        factors.append("Poor drainage infrastructure")
+    if elevation < LOW_ELEVATION_THRESHOLD:
+        factors.append(f"Low elevation ({elevation:.1f} m)")
+    if history >= 4:
+        factors.append("High flood history area")
+
+    return total, factors
 
 
-# ---------------------------------------------------------------------------
-# Risk-level thresholds
-# ---------------------------------------------------------------------------
-
-def _level_from_score(score: int) -> str:
-    if score >= 76:
-        return "CRITICAL"
-    if score >= 51:
-        return "HIGH"
-    if score >= 26:
-        return "MODERATE"
-    return "LOW"
+def _determine_alert_level(score: int) -> int:
+    """Map a 0-100 composite score to an alert level (0-3)."""
+    for level, (lo, hi) in ALERT_THRESHOLDS.items():
+        if lo <= score <= hi:
+            return level
+    return 3  # anything above 100 is emergency
 
 
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 
-def classify_risk(data: dict) -> dict:
-    """Classify flood risk for a single location.
+def classify_district(
+    district: dict,
+    weather_data: dict | None = None,
+    river_data: dict | None = None,
+    satellite_data: dict | None = None,
+) -> dict:
+    """Compute the current flood risk classification for a single district.
 
     Parameters
     ----------
-    data : dict
-        Must contain the following keys (all numeric, may be None):
-            rainfall_24h, rainfall_3d, rainfall_7d, forecast_3d,
-            soil_moisture, river_discharge, river_discharge_avg,
-            elevation_m, proximity_mekong
+    district : dict
+        A district record from :pymod:`scraper.districts`.
+    weather_data : dict or None
+        Rainfall observations, forecasts, soil moisture. Keys described in
+        the module docstring.
+    river_data : dict or None
+        River discharge ratio and Tonle Sap reversal flag.
+    satellite_data : dict or None
+        Flood fraction percentage from satellite imagery.
 
     Returns
     -------
-    dict with keys:
-        risk_level  : str   ("LOW", "MODERATE", "HIGH", "CRITICAL")
-        risk_score  : int
-        factors     : list[str]  -- human-readable breakdown
+    dict
+        Classification result containing alert level, score, component
+        breakdown, human-readable factors, and key observation values.
     """
-    # Helper to safely treat None as 0.
-    def v(key, default=0.0):
-        val = data.get(key)
-        return val if val is not None else default
+    all_factors: list[str] = []
 
-    rainfall_24h = v("rainfall_24h")
-    rainfall_3d = v("rainfall_3d")
-    rainfall_7d = v("rainfall_7d")
-    forecast_3d = v("forecast_3d")
-    soil_moisture = v("soil_moisture")
-    discharge = v("river_discharge")
-    discharge_avg = v("river_discharge_avg", default=1.0)  # avoid div-by-zero
-    elevation_m = v("elevation_m", default=100.0)
-    proximity_mekong = v("proximity_mekong", default=0.0)
+    rainfall_score, rainfall_factors = _score_rainfall(weather_data)
+    soil_score, soil_factors = _score_soil(weather_data)
+    river_score, river_factors = _score_river(river_data)
+    sat_score, sat_factors = _score_satellite(satellite_data)
+    vuln_score, vuln_factors = _score_vulnerability(district)
 
-    # Compute discharge ratio.
-    discharge_ratio = discharge / discharge_avg if discharge_avg > 0 else 0.0
+    all_factors.extend(rainfall_factors)
+    all_factors.extend(soil_factors)
+    all_factors.extend(river_factors)
+    all_factors.extend(sat_factors)
+    all_factors.extend(vuln_factors)
 
-    # Individual scores.
-    s_r24 = _score_rainfall_24h(rainfall_24h)
-    s_r3d = _score_rainfall_3d(rainfall_3d)
-    s_r7d = _score_rainfall_7d(rainfall_7d)
-    s_fc3 = _score_forecast_3d(forecast_3d)
-    s_sm = _score_soil_moisture(soil_moisture)
-    s_dr = _score_discharge_ratio(discharge_ratio)
-    s_el = _score_elevation(elevation_m)
+    raw_score = rainfall_score + soil_score + river_score + sat_score + vuln_score
+    score = int(clamp(raw_score, 0, 100))
+    level = _determine_alert_level(score)
 
-    total = s_r24 + s_r3d + s_r7d + s_fc3 + s_sm + s_dr + s_el
-
-    factors = []
-
-    # Wet-season modifier (June through November).
-    now = datetime.now(timezone.utc)
-    wet_season = 6 <= now.month <= 11
-    if wet_season:
-        total = int(total * 1.2)
-        factors.append("Wet season multiplier applied (x1.2)")
-
-    # Mekong proximity bonus.
-    if proximity_mekong > 0.7:
-        total += 10
-        factors.append(f"Mekong proximity bonus +10 (proximity={proximity_mekong})")
-
-    # Build human-readable factor list.
-    factors.insert(0, f"Rainfall 24h: {rainfall_24h:.1f} mm -> {s_r24} pts")
-    factors.insert(1, f"Rainfall 3d:  {rainfall_3d:.1f} mm -> {s_r3d} pts")
-    factors.insert(2, f"Rainfall 7d:  {rainfall_7d:.1f} mm -> {s_r7d} pts")
-    factors.insert(3, f"Forecast 3d:  {forecast_3d:.1f} mm -> {s_fc3} pts")
-    factors.insert(4, f"Soil moisture: {soil_moisture:.3f} -> {s_sm} pts")
-    factors.insert(5, f"Discharge ratio: {discharge_ratio:.2f} -> {s_dr} pts")
-    factors.insert(6, f"Elevation: {elevation_m:.0f} m -> {s_el} pts")
-
-    risk_level = _level_from_score(total)
+    # If nothing notable, add a reassuring default factor.
+    if not all_factors:
+        all_factors.append("Dry conditions")
 
     return {
-        "risk_level": risk_level,
-        "risk_score": total,
-        "factors": factors,
+        "district_id": district.get("id"),
+        "level": level,
+        "label": ALERT_LABELS.get(level, "UNKNOWN"),
+        "score": score,
+        "component_scores": {
+            "rainfall": rainfall_score,
+            "soil": soil_score,
+            "river": river_score,
+            "satellite": sat_score,
+            "vulnerability": vuln_score,
+        },
+        "factors": all_factors,
+        # Pass-through observation values for downstream consumers.
+        "rainfall_24h_mm": safe_round(_safe_get(weather_data, "rainfall_24h_mm")),
+        "rainfall_3d_mm": safe_round(_safe_get(weather_data, "rainfall_3d_mm")),
+        "rainfall_7d_mm": safe_round(_safe_get(weather_data, "rainfall_7d_mm")),
+        "forecast_24h_mm": safe_round(_safe_get(weather_data, "forecast_24h_mm")),
+        "forecast_48h_mm": safe_round(_safe_get(weather_data, "forecast_48h_mm")),
+        "forecast_72h_mm": safe_round(_safe_get(weather_data, "forecast_72h_mm")),
+        "soil_moisture": safe_round(_safe_get(weather_data, "soil_moisture")),
+        "soil_moisture_deep": safe_round(_safe_get(weather_data, "soil_moisture_deep")),
+        "river_discharge_ratio": safe_round(_safe_get(river_data, "discharge_ratio")),
     }

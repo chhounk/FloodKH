@@ -1,387 +1,206 @@
-/* ============================================
-   FloodKH — Dashboard / Sidebar Module
-   ============================================ */
+/**
+ * FloodKH Dashboard Module — Summary cards, district rankings, charts, river gauge.
+ */
+const Dashboard = {
+    data: null,
+    historyData: null,
+    charts: {},
 
-const Dashboard = (() => {
-  let currentData = null;
-  let historyData = null;
-  let sortColumn = 'risk_score';
-  let sortDirection = 'desc';
-  let sparklineCharts = {};
+    init(data, historyData) {
+        this.data = data;
+        this.historyData = historyData;
+        this.renderSummaryCards('current');
+        this.renderDistrictRanking('current');
+        this.renderSourceStatus();
+        this.renderRiverGauge();
+    },
 
-  const RISK_ORDER = { CRITICAL: 0, HIGH: 1, MODERATE: 2, LOW: 3 };
-  const RISK_COLORS = {
-    LOW: '#22c55e',
-    MODERATE: '#eab308',
-    HIGH: '#f97316',
-    CRITICAL: '#ef4444'
-  };
+    renderSummaryCards(step) {
+        if (!this.data?.districts) return;
+        const counts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+        this.data.districts.forEach(d => {
+            const info = step === 'current' ? d.current : d.forecast?.[step];
+            counts[info?.level ?? 0]++;
+        });
+        document.getElementById('count-normal').textContent = counts[0];
+        document.getElementById('count-watch').textContent = counts[1];
+        document.getElementById('count-warning').textContent = counts[2];
+        document.getElementById('count-emergency').textContent = counts[3];
+    },
 
-  function updateSummary(data) {
-    const summary = data.national_summary || computeSummary(data.locations);
-    document.getElementById('countCritical').textContent = summary.CRITICAL || 0;
-    document.getElementById('countHigh').textContent = summary.HIGH || 0;
-    document.getElementById('countModerate').textContent = summary.MODERATE || 0;
-    document.getElementById('countLow').textContent = summary.LOW || 0;
-  }
+    renderDistrictRanking(step) {
+        const container = document.getElementById('district-ranking');
+        if (!container || !this.data?.districts) return;
 
-  function computeSummary(locations) {
-    const counts = { LOW: 0, MODERATE: 0, HIGH: 0, CRITICAL: 0 };
-    locations.forEach(loc => {
-      if (counts.hasOwnProperty(loc.risk_level)) {
-        counts[loc.risk_level]++;
-      }
-    });
-    return counts;
-  }
+        const sorted = [...this.data.districts].sort((a, b) => {
+            const sa = step === 'current' ? a.current?.score : a.forecast?.[step]?.score;
+            const sb = step === 'current' ? b.current?.score : b.forecast?.[step]?.score;
+            return (sb || 0) - (sa || 0);
+        });
 
-  function updateTable(locations) {
-    currentData = locations;
-    const tbody = document.getElementById('locationTableBody');
-    const sorted = sortLocations(locations);
-    const isKhmer = I18n.getLang() === 'km';
+        const colors = { 0: '#22c55e', 1: '#eab308', 2: '#f97316', 3: '#ef4444' };
 
-    tbody.innerHTML = sorted.map(loc => {
-      const name = isKhmer && loc.name_km ? loc.name_km : loc.name;
-      const riskClass = loc.risk_level.toLowerCase();
-      return `
-        <tr data-lat="${loc.lat}" data-lon="${loc.lon}" data-name="${loc.name}">
-          <td>${name}</td>
-          <td><span class="risk-badge ${riskClass}">${I18n.t(loc.risk_level.toLowerCase())}</span></td>
-          <td>${loc.risk_score}</td>
-          <td>${loc.rainfall_24h_mm}</td>
-          <td>${loc.forecast_3d_mm}</td>
-        </tr>
-      `;
-    }).join('');
+        container.innerHTML = sorted.map(d => {
+            const info = step === 'current' ? d.current : d.forecast?.[step];
+            const level = info?.level ?? 0;
+            const score = info?.score ?? 0;
+            return `
+                <div class="district-rank-item" onclick="FloodMap.flyTo(${d.lat}, ${d.lon}); FloodMap.showDistrictPopup('${d.id}')">
+                    <div class="rank-indicator" style="background:${colors[level]}"></div>
+                    <div class="rank-info">
+                        <span class="rank-name">${d.name}</span>
+                        <span class="rank-name-km">${d.name_km}</span>
+                    </div>
+                    <div class="rank-score">
+                        <div class="score-bar-bg">
+                            <div class="score-bar-fill" style="width:${score}%;background:${colors[level]}"></div>
+                        </div>
+                        <span class="score-value">${score}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    },
 
-    // Add click handlers
-    tbody.querySelectorAll('tr').forEach(tr => {
-      tr.addEventListener('click', () => {
-        const lat = parseFloat(tr.dataset.lat);
-        const lon = parseFloat(tr.dataset.lon);
-        FloodMap.flyTo(lat, lon, 10);
-      });
-    });
+    renderSourceStatus() {
+        const container = document.getElementById('source-indicators');
+        if (!container || !this.data?.data_sources_status) return;
 
-    // Update sort indicators
-    updateSortIndicators();
-  }
+        const labels = {
+            open_meteo: 'Open-Meteo',
+            sentinel_1: 'Sentinel-1 SAR',
+            sentinel_2: 'Sentinel-2',
+            nasa_gpm: 'NASA GPM',
+            river_discharge: 'River Discharge'
+        };
 
-  function sortLocations(locations) {
-    return [...locations].sort((a, b) => {
-      let va = a[sortColumn];
-      let vb = b[sortColumn];
+        container.innerHTML = Object.entries(this.data.data_sources_status).map(([key, status]) => {
+            const isLive = status === 'ok';
+            return `<div class="source-item">
+                <span class="source-dot ${isLive ? 'live' : 'stub'}"></span>
+                <span class="source-name">${labels[key] || key}</span>
+                <span class="source-status-text">${status}</span>
+            </div>`;
+        }).join('');
+    },
 
-      if (sortColumn === 'risk_level') {
-        va = RISK_ORDER[va] ?? 3;
-        vb = RISK_ORDER[vb] ?? 3;
-      } else if (sortColumn === 'name') {
-        va = (va || '').toLowerCase();
-        vb = (vb || '').toLowerCase();
-        if (sortDirection === 'asc') return va < vb ? -1 : va > vb ? 1 : 0;
-        return va > vb ? -1 : va < vb ? 1 : 0;
-      }
+    renderRiverGauge() {
+        const container = document.getElementById('river-gauge');
+        if (!container || !this.data?.districts) return;
 
-      if (typeof va === 'number' && typeof vb === 'number') {
-        return sortDirection === 'asc' ? va - vb : vb - va;
-      }
-      return 0;
-    });
-  }
+        // Average river discharge ratio across districts
+        let totalRatio = 0, count = 0;
+        this.data.districts.forEach(d => {
+            const r = d.current?.river_discharge_ratio;
+            if (r != null) { totalRatio += r; count++; }
+        });
+        const ratio = count > 0 ? totalRatio / count : 0;
+        const pct = Math.min(ratio / 2.5 * 100, 100);
+        let color = '#22c55e';
+        if (ratio > 2.0) color = '#ef4444';
+        else if (ratio > 1.6) color = '#f97316';
+        else if (ratio > 1.3) color = '#eab308';
 
-  function updateSortIndicators() {
-    document.querySelectorAll('.location-table thead th').forEach(th => {
-      th.classList.remove('sort-asc', 'sort-desc');
-      if (th.dataset.sort === sortColumn) {
-        th.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
-      }
-    });
-  }
+        container.innerHTML = `
+            <div class="gauge-container">
+                <div class="gauge-bar">
+                    <div class="gauge-fill" style="height:${pct}%;background:${color}"></div>
+                </div>
+                <div class="gauge-labels">
+                    <span class="gauge-value">${ratio.toFixed(2)}\u00d7</span>
+                    <span class="gauge-label" data-i18n="avg_ratio">vs average</span>
+                </div>
+                <div class="gauge-thresholds">
+                    <span style="bottom:40%">1.0\u00d7</span>
+                    <span style="bottom:64%">1.6\u00d7</span>
+                    <span style="bottom:80%">2.0\u00d7</span>
+                </div>
+            </div>
+        `;
+    },
 
-  function initSortHandlers() {
-    document.querySelectorAll('.location-table thead th.sortable').forEach(th => {
-      th.addEventListener('click', () => {
-        const col = th.dataset.sort;
-        if (sortColumn === col) {
-          sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-        } else {
-          sortColumn = col;
-          sortDirection = col === 'name' ? 'asc' : 'desc';
-        }
-        if (currentData) {
-          updateTable(currentData);
-        }
-      });
-    });
-  }
+    updateForTimeStep(step) {
+        this.renderSummaryCards(step);
+        this.renderDistrictRanking(step);
+    },
 
-  function updatePredictions(locations) {
-    const container = document.getElementById('predictionCards');
-    // Show locations with notable forecast
-    const notable = [...locations]
-      .filter(l => l.forecast_3d_mm > 20)
-      .sort((a, b) => b.forecast_3d_mm - a.forecast_3d_mm)
-      .slice(0, 5);
+    refresh() {
+        this.renderDashboardCharts();
+    },
 
-    if (notable.length === 0) {
-      container.innerHTML = `<p style="color:var(--text-muted);font-size:0.82rem;">${I18n.t('no_data')}</p>`;
-      return;
+    renderDashboardCharts() {
+        const container = document.getElementById('dashboard-view');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="dashboard-grid">
+                <div class="chart-card"><h3 data-i18n="risk_distribution">Risk Distribution</h3><canvas id="chart-donut"></canvas></div>
+                <div class="chart-card"><h3 data-i18n="rainfall_forecast">72h Rainfall Forecast</h3><canvas id="chart-rainfall"></canvas></div>
+                <div class="chart-card full-width"><h3 data-i18n="district_scores">District Risk Scores</h3><canvas id="chart-scores"></canvas></div>
+            </div>
+        `;
+
+        I18n.applyTranslations();
+        this._renderDonut();
+        this._renderRainfall();
+        this._renderScores();
+    },
+
+    _renderDonut() {
+        const ctx = document.getElementById('chart-donut');
+        if (!ctx) return;
+        const counts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+        (this.data?.districts || []).forEach(d => { counts[d.current?.level ?? 0]++; });
+        if (this.charts.donut) this.charts.donut.destroy();
+        this.charts.donut = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Normal', 'Watch', 'Warning', 'Emergency'],
+                datasets: [{ data: [counts[0], counts[1], counts[2], counts[3]], backgroundColor: ['#22c55e', '#eab308', '#f97316', '#ef4444'], borderWidth: 0 }]
+            },
+            options: { responsive: true, plugins: { legend: { labels: { color: '#e0e6f0' } } } }
+        });
+    },
+
+    _renderRainfall() {
+        const ctx = document.getElementById('chart-rainfall');
+        if (!ctx) return;
+        const ds = this.data?.districts || [];
+        const avg = (key) => ds.reduce((s, d) => s + (d.current?.[key] || 0), 0) / (ds.length || 1);
+        const vals = [avg('rainfall_24h_mm'), avg('forecast_24h_mm'), avg('forecast_48h_mm'), avg('forecast_72h_mm')];
+        if (this.charts.rainfall) this.charts.rainfall.destroy();
+        this.charts.rainfall = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Past 24h', '+24h', '+48h', '+72h'],
+                datasets: [{ label: 'Avg Rainfall (mm)', data: vals.map(v => v.toFixed(1)), backgroundColor: ['#3b82f6', '#60a5fa', '#93bbfd', '#bfdbfe'], borderWidth: 0 }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { ticks: { color: '#8892a4' }, grid: { color: '#2a3548' } }, x: { ticks: { color: '#8892a4' }, grid: { display: false } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+    },
+
+    _renderScores() {
+        const ctx = document.getElementById('chart-scores');
+        if (!ctx) return;
+        const sorted = [...(this.data?.districts || [])].sort((a, b) => (b.current?.score || 0) - (a.current?.score || 0));
+        const colors = { 0: '#22c55e', 1: '#eab308', 2: '#f97316', 3: '#ef4444' };
+        if (this.charts.scores) this.charts.scores.destroy();
+        this.charts.scores = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sorted.map(d => d.name),
+                datasets: [{ label: 'Risk Score', data: sorted.map(d => d.current?.score || 0), backgroundColor: sorted.map(d => colors[d.current?.level || 0]), borderWidth: 0 }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                scales: { x: { max: 100, ticks: { color: '#8892a4' }, grid: { color: '#2a3548' } }, y: { ticks: { color: '#e0e6f0', font: { size: 11 } }, grid: { display: false } } },
+                plugins: { legend: { display: false } }
+            }
+        });
     }
-
-    const isKhmer = I18n.getLang() === 'km';
-    container.innerHTML = notable.map(loc => {
-      const name = isKhmer && loc.name_km ? loc.name_km : loc.name;
-      const currentRisk = loc.risk_level;
-      const forecastRisk = predictRisk(loc);
-      const currentColor = RISK_COLORS[currentRisk];
-      const forecastColor = RISK_COLORS[forecastRisk];
-      const arrow = RISK_ORDER[forecastRisk] < RISK_ORDER[currentRisk]
-        ? '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3l5 7H3z"/></svg>'
-        : RISK_ORDER[forecastRisk] > RISK_ORDER[currentRisk]
-          ? '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 13l5-7H3z"/></svg>'
-          : '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 8h10"/><rect x="3" y="7" width="10" height="2" rx="1"/></svg>';
-
-      return `
-        <div class="prediction-card">
-          <span class="prediction-name">${name}</span>
-          <span class="prediction-arrow">
-            <span class="risk-badge ${currentRisk.toLowerCase()}">${I18n.t(currentRisk.toLowerCase())}</span>
-            ${arrow}
-            <span class="risk-badge ${forecastRisk.toLowerCase()}">${I18n.t(forecastRisk.toLowerCase())}</span>
-          </span>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function predictRisk(loc) {
-    // Simple heuristic: if forecast is heavy, bump risk level
-    const forecast = loc.forecast_3d_mm || 0;
-    if (forecast > 150) return 'CRITICAL';
-    if (forecast > 80) return 'HIGH';
-    if (forecast > 40) return 'MODERATE';
-    return loc.risk_level;
-  }
-
-  function updateTimestamp(timestamp) {
-    const el = document.getElementById('lastUpdated');
-    if (!timestamp) {
-      el.textContent = '--';
-      return;
-    }
-    try {
-      const date = new Date(timestamp);
-      const opts = {
-        year: 'numeric', month: 'short', day: 'numeric',
-        hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
-      };
-      el.textContent = date.toLocaleDateString('en-US', opts);
-    } catch {
-      el.textContent = timestamp;
-    }
-  }
-
-  // Dashboard view charts
-  function renderDashboard(locations, history) {
-    historyData = history;
-    const grid = document.getElementById('dashboardGrid');
-    grid.innerHTML = '';
-
-    // Risk distribution chart
-    const distCard = createDashCard('Risk Distribution');
-    grid.appendChild(distCard.card);
-    renderRiskDistribution(distCard.canvas, locations);
-
-    // Top rainfall chart
-    const rainCard = createDashCard('Rainfall 24h (mm)');
-    grid.appendChild(rainCard.card);
-    renderTopRainfall(rainCard.canvas, locations);
-
-    // Forecast chart
-    const forecastCard = createDashCard('3-Day Forecast (mm)');
-    grid.appendChild(forecastCard.card);
-    renderForecast(forecastCard.canvas, locations);
-
-    // River discharge chart
-    const riverCard = createDashCard('River Discharge vs Avg');
-    grid.appendChild(riverCard.card);
-    renderRiverDischarge(riverCard.canvas, locations);
-
-    // History sparklines for notable locations
-    if (history && history.locations) {
-      Object.keys(history.locations).slice(0, 4).forEach(locName => {
-        const histCard = createDashCard(`${locName} — 30-day Risk Score`);
-        grid.appendChild(histCard.card);
-        renderHistorySparkline(histCard.canvas, history.locations[locName]);
-      });
-    }
-  }
-
-  function createDashCard(title) {
-    const card = document.createElement('div');
-    card.className = 'dashboard-card';
-    card.innerHTML = `
-      <div class="dashboard-card-title">${title}</div>
-      <div class="dashboard-chart-container"><canvas></canvas></div>
-    `;
-    const canvas = card.querySelector('canvas');
-    return { card, canvas };
-  }
-
-  function chartDefaults() {
-    return {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#8892a4', font: { size: 11 } } }
-      },
-      scales: {
-        x: { ticks: { color: '#5a6478', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
-        y: { ticks: { color: '#5a6478', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
-      }
-    };
-  }
-
-  function renderRiskDistribution(canvas, locations) {
-    const counts = computeSummary(locations);
-    new Chart(canvas, {
-      type: 'doughnut',
-      data: {
-        labels: ['Critical', 'High', 'Moderate', 'Low'],
-        datasets: [{
-          data: [counts.CRITICAL, counts.HIGH, counts.MODERATE, counts.LOW],
-          backgroundColor: [RISK_COLORS.CRITICAL, RISK_COLORS.HIGH, RISK_COLORS.MODERATE, RISK_COLORS.LOW],
-          borderWidth: 0,
-          hoverOffset: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '65%',
-        plugins: {
-          legend: {
-            position: 'right',
-            labels: { color: '#8892a4', font: { size: 11 }, padding: 12, usePointStyle: true, pointStyleWidth: 10 }
-          }
-        }
-      }
-    });
-  }
-
-  function renderTopRainfall(canvas, locations) {
-    const top = [...locations].sort((a, b) => b.rainfall_24h_mm - a.rainfall_24h_mm).slice(0, 8);
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: top.map(l => l.name.length > 12 ? l.name.slice(0, 12) + '..' : l.name),
-        datasets: [{
-          data: top.map(l => l.rainfall_24h_mm),
-          backgroundColor: top.map(l => RISK_COLORS[l.risk_level] + '88'),
-          borderColor: top.map(l => RISK_COLORS[l.risk_level]),
-          borderWidth: 1,
-          borderRadius: 4
-        }]
-      },
-      options: {
-        ...chartDefaults(),
-        indexAxis: 'y',
-        plugins: { legend: { display: false } }
-      }
-    });
-  }
-
-  function renderForecast(canvas, locations) {
-    const top = [...locations].sort((a, b) => b.forecast_3d_mm - a.forecast_3d_mm).slice(0, 8);
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: top.map(l => l.name.length > 12 ? l.name.slice(0, 12) + '..' : l.name),
-        datasets: [{
-          data: top.map(l => l.forecast_3d_mm),
-          backgroundColor: top.map(l => RISK_COLORS[l.risk_level] + '66'),
-          borderColor: top.map(l => RISK_COLORS[l.risk_level]),
-          borderWidth: 1,
-          borderRadius: 4
-        }]
-      },
-      options: {
-        ...chartDefaults(),
-        indexAxis: 'y',
-        plugins: { legend: { display: false } }
-      }
-    });
-  }
-
-  function renderRiverDischarge(canvas, locations) {
-    const withRiver = locations.filter(l => l.river_discharge_m3s > 0).slice(0, 10);
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: withRiver.map(l => l.name.length > 10 ? l.name.slice(0, 10) + '..' : l.name),
-        datasets: [
-          {
-            label: 'Current',
-            data: withRiver.map(l => l.river_discharge_m3s),
-            backgroundColor: '#3b82f688',
-            borderColor: '#3b82f6',
-            borderWidth: 1,
-            borderRadius: 4
-          },
-          {
-            label: 'Average',
-            data: withRiver.map(l => l.river_discharge_avg_m3s),
-            backgroundColor: '#6366f144',
-            borderColor: '#6366f1',
-            borderWidth: 1,
-            borderRadius: 4
-          }
-        ]
-      },
-      options: chartDefaults()
-    });
-  }
-
-  function renderHistorySparkline(canvas, locHistory) {
-    const dates = locHistory.map(h => h.date.slice(5)); // MM-DD
-    const scores = locHistory.map(h => h.risk_score);
-    new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels: dates,
-        datasets: [{
-          data: scores,
-          borderColor: '#3b82f6',
-          backgroundColor: 'rgba(59,130,246,0.1)',
-          fill: true,
-          tension: 0.35,
-          pointRadius: 1.5,
-          pointHoverRadius: 4,
-          borderWidth: 2
-        }]
-      },
-      options: {
-        ...chartDefaults(),
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: '#5a6478', font: { size: 9 }, maxTicksLimit: 8 }, grid: { display: false } },
-          y: { min: 0, max: 100, ticks: { color: '#5a6478', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
-        }
-      }
-    });
-  }
-
-  function init() {
-    initSortHandlers();
-  }
-
-  return {
-    init,
-    updateSummary,
-    updateTable,
-    updatePredictions,
-    updateTimestamp,
-    renderDashboard
-  };
-})();
+};

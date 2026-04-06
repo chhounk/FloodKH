@@ -1,0 +1,297 @@
+{
+  "generated_at": "2026-04-06T12:00:00Z",
+  "model_version": "1.0.0",
+  "data_sources_status": {
+    "open_meteo": "ok",
+    "sentinel_1": "stub",
+    "sentinel_2": "stub",
+    "nasa_gpm": "stub",
+    "river_discharge": "ok"
+  },
+  "districts": [
+    {
+      "id": "chamkarmon",
+      "name": "Chamkarmon",
+      "name_km": "ចំការមន",
+      "lat": 11.55,
+      "lon": 104.93,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 14,
+        "factors": ["Low rainfall", "Dry soil conditions"],
+        "rainfall_24h_mm": 2.1, "rainfall_3d_mm": 5.8, "rainfall_7d_mm": 12.4,
+        "forecast_24h_mm": 8.0, "forecast_48h_mm": 15.0, "forecast_72h_mm": 5.0,
+        "soil_moisture": 0.25, "soil_moisture_deep": 0.32, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 14}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 16, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 18, "confidence": "medium", "key_driver": "Moderate rain forecast", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 15, "confidence": "low", "key_driver": "Rain easing", "factors": ["Low rainfall"]}
+      }
+    },
+    {
+      "id": "daun_penh",
+      "name": "Daun Penh",
+      "name_km": "ដូនពេញ",
+      "lat": 11.575,
+      "lon": 104.92,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 16,
+        "factors": ["Low rainfall", "Low elevation (9.0 m)", "Poor drainage infrastructure"],
+        "rainfall_24h_mm": 1.8, "rainfall_3d_mm": 4.2, "rainfall_7d_mm": 10.5,
+        "forecast_24h_mm": 6.0, "forecast_48h_mm": 12.0, "forecast_72h_mm": 4.0,
+        "soil_moisture": 0.22, "soil_moisture_deep": 0.28, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 16}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 17, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 19, "confidence": "medium", "key_driver": "Rain expected", "factors": ["Low rainfall"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 22, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["Low elevation (9.0 m)"]}
+      }
+    },
+    {
+      "id": "prampir_makara",
+      "name": "Prampir Makara",
+      "name_km": "ប្រាំពីរមករា",
+      "lat": 11.565,
+      "lon": 104.915,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 10,
+        "factors": ["Low rainfall", "Dry soil conditions"],
+        "rainfall_24h_mm": 1.5, "rainfall_3d_mm": 3.8, "rainfall_7d_mm": 9.2,
+        "forecast_24h_mm": 5.0, "forecast_48h_mm": 10.0, "forecast_72h_mm": 3.0,
+        "soil_moisture": 0.21, "soil_moisture_deep": 0.27, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 10}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 11, "confidence": "high", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 12, "confidence": "medium", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 11, "confidence": "low", "key_driver": "Stable conditions", "factors": ["Low rainfall"]}
+      }
+    },
+    {
+      "id": "tuol_kork",
+      "name": "Tuol Kork",
+      "name_km": "ទួលគោក",
+      "lat": 11.58,
+      "lon": 104.90,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 8,
+        "factors": ["Low rainfall", "Dry soil conditions"],
+        "rainfall_24h_mm": 1.2, "rainfall_3d_mm": 3.5, "rainfall_7d_mm": 8.8,
+        "forecast_24h_mm": 4.0, "forecast_48h_mm": 8.0, "forecast_72h_mm": 3.0,
+        "soil_moisture": 0.20, "soil_moisture_deep": 0.26, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 8}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 9, "confidence": "high", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 10, "confidence": "medium", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 9, "confidence": "low", "key_driver": "Stable conditions", "factors": ["Low rainfall"]}
+      }
+    },
+    {
+      "id": "dangkor",
+      "name": "Dangkor",
+      "name_km": "ដង្កោ",
+      "lat": 11.48,
+      "lon": 104.86,
+      "current": {
+        "level": 1, "label": "WATCH", "score": 23,
+        "factors": ["Poor drainage infrastructure", "Low elevation (7.5 m)", "High flood history area"],
+        "rainfall_24h_mm": 4.5, "rainfall_3d_mm": 12.0, "rainfall_7d_mm": 28.0,
+        "forecast_24h_mm": 18.0, "forecast_48h_mm": 25.0, "forecast_72h_mm": 15.0,
+        "soil_moisture": 0.32, "soil_moisture_deep": 0.38, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 3, "river": 0, "satellite": 0, "vulnerability": 17}
+      },
+      "forecast": {
+        "t24h": {"level": 1, "label": "WATCH", "score": 28, "confidence": "high", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure", "Low elevation (7.5 m)"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 33, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure", "Moderate rainfall"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 30, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["Poor drainage infrastructure"]}
+      }
+    },
+    {
+      "id": "mean_chey",
+      "name": "Mean Chey",
+      "name_km": "មានជ័យ",
+      "lat": 11.52,
+      "lon": 104.95,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 18,
+        "factors": ["Low rainfall", "Low elevation (8.0 m)", "High flood history area"],
+        "rainfall_24h_mm": 3.0, "rainfall_3d_mm": 7.5, "rainfall_7d_mm": 18.0,
+        "forecast_24h_mm": 12.0, "forecast_48h_mm": 22.0, "forecast_72h_mm": 10.0,
+        "soil_moisture": 0.28, "soil_moisture_deep": 0.34, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 18}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 20, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Low elevation (8.0 m)"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 25, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["High flood history area"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 24, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["High flood history area"]}
+      }
+    },
+    {
+      "id": "russey_keo",
+      "name": "Russey Keo",
+      "name_km": "ឫស្សីកែវ",
+      "lat": 11.61,
+      "lon": 104.89,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 15,
+        "factors": ["Low rainfall", "Low elevation (9.5 m)"],
+        "rainfall_24h_mm": 2.0, "rainfall_3d_mm": 5.0, "rainfall_7d_mm": 11.5,
+        "forecast_24h_mm": 7.0, "forecast_48h_mm": 14.0, "forecast_72h_mm": 5.0,
+        "soil_moisture": 0.24, "soil_moisture_deep": 0.30, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 15}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 16, "confidence": "high", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 18, "confidence": "medium", "key_driver": "Slight rain increase", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 16, "confidence": "low", "key_driver": "Stable conditions", "factors": ["Low rainfall"]}
+      }
+    },
+    {
+      "id": "sen_sok",
+      "name": "Sen Sok",
+      "name_km": "សែនសុខ",
+      "lat": 11.59,
+      "lon": 104.85,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 18,
+        "factors": ["Low rainfall", "Poor drainage infrastructure", "High flood history area"],
+        "rainfall_24h_mm": 2.5, "rainfall_3d_mm": 6.5, "rainfall_7d_mm": 15.0,
+        "forecast_24h_mm": 10.0, "forecast_48h_mm": 18.0, "forecast_72h_mm": 8.0,
+        "soil_moisture": 0.27, "soil_moisture_deep": 0.33, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 18}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 20, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Poor drainage infrastructure"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 24, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 22, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["Poor drainage infrastructure"]}
+      }
+    },
+    {
+      "id": "pou_senchey",
+      "name": "Pou Senchey",
+      "name_km": "ពោធិ៍សែនជ័យ",
+      "lat": 11.55,
+      "lon": 104.85,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 13,
+        "factors": ["Low rainfall", "Dry soil conditions"],
+        "rainfall_24h_mm": 1.8, "rainfall_3d_mm": 4.5, "rainfall_7d_mm": 10.0,
+        "forecast_24h_mm": 6.0, "forecast_48h_mm": 11.0, "forecast_72h_mm": 4.0,
+        "soil_moisture": 0.23, "soil_moisture_deep": 0.29, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 13}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 14, "confidence": "high", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 16, "confidence": "medium", "key_driver": "Slight rain increase", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 14, "confidence": "low", "key_driver": "Stable conditions", "factors": ["Low rainfall"]}
+      }
+    },
+    {
+      "id": "chroy_changvar",
+      "name": "Chroy Changvar",
+      "name_km": "ជ្រោយចង្វារ",
+      "lat": 11.62,
+      "lon": 104.94,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 18,
+        "factors": ["Low rainfall", "Low elevation (7.0 m)", "High flood history area"],
+        "rainfall_24h_mm": 2.8, "rainfall_3d_mm": 7.0, "rainfall_7d_mm": 16.5,
+        "forecast_24h_mm": 10.0, "forecast_48h_mm": 20.0, "forecast_72h_mm": 8.0,
+        "soil_moisture": 0.26, "soil_moisture_deep": 0.32, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 18}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 20, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Low elevation (7.0 m)"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 26, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Low elevation (7.0 m)", "High flood history area"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 24, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["Low elevation (7.0 m)"]}
+      }
+    },
+    {
+      "id": "prek_pnov",
+      "name": "Prek Pnov",
+      "name_km": "ព្រែកព្នៅ",
+      "lat": 11.65,
+      "lon": 104.87,
+      "current": {
+        "level": 1, "label": "WATCH", "score": 22,
+        "factors": ["Poor drainage infrastructure", "Low elevation (8.5 m)", "High flood history area"],
+        "rainfall_24h_mm": 3.8, "rainfall_3d_mm": 10.0, "rainfall_7d_mm": 24.0,
+        "forecast_24h_mm": 15.0, "forecast_48h_mm": 22.0, "forecast_72h_mm": 12.0,
+        "soil_moisture": 0.30, "soil_moisture_deep": 0.36, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 3, "river": 0, "satellite": 0, "vulnerability": 17}
+      },
+      "forecast": {
+        "t24h": {"level": 1, "label": "WATCH", "score": 26, "confidence": "high", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 30, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure", "High flood history area"]},
+        "t72h": {"level": 1, "label": "WATCH", "score": 28, "confidence": "low", "key_driver": "Cumulative rainfall", "factors": ["Poor drainage infrastructure"]}
+      }
+    },
+    {
+      "id": "chbar_ampov",
+      "name": "Chbar Ampov",
+      "name_km": "ច្បារអំពៅ",
+      "lat": 11.51,
+      "lon": 104.97,
+      "current": {
+        "level": 1, "label": "WATCH", "score": 25,
+        "factors": ["Poor drainage infrastructure", "Low elevation (6.5 m)", "High flood history area"],
+        "rainfall_24h_mm": 5.2, "rainfall_3d_mm": 14.0, "rainfall_7d_mm": 32.0,
+        "forecast_24h_mm": 22.0, "forecast_48h_mm": 35.0, "forecast_72h_mm": 20.0,
+        "soil_moisture": 0.34, "soil_moisture_deep": 0.40, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 5, "soil": 3, "river": 0, "satellite": 0, "vulnerability": 17}
+      },
+      "forecast": {
+        "t24h": {"level": 1, "label": "WATCH", "score": 32, "confidence": "high", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure", "Low elevation (6.5 m)"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 40, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure", "Moderate rainfall", "Soil moisture trend rising"]},
+        "t72h": {"level": 2, "label": "WARNING", "score": 48, "confidence": "low", "key_driver": "Sustained rain on saturating ground", "factors": ["Poor drainage infrastructure", "Moderate rainfall", "Soil moisture elevated", "High flood history area"]}
+      }
+    },
+    {
+      "id": "kamboul",
+      "name": "Kamboul",
+      "name_km": "កំបូល",
+      "lat": 11.51,
+      "lon": 104.83,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 17,
+        "factors": ["Low rainfall", "Poor drainage infrastructure", "High flood history area"],
+        "rainfall_24h_mm": 2.2, "rainfall_3d_mm": 5.5, "rainfall_7d_mm": 13.0,
+        "forecast_24h_mm": 8.0, "forecast_48h_mm": 14.0, "forecast_72h_mm": 6.0,
+        "soil_moisture": 0.25, "soil_moisture_deep": 0.31, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 17}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 19, "confidence": "high", "key_driver": "Slight rain increase", "factors": ["Poor drainage infrastructure"]},
+        "t48h": {"level": 1, "label": "WATCH", "score": 22, "confidence": "medium", "key_driver": "Forecast rainfall accumulation", "factors": ["Poor drainage infrastructure"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 20, "confidence": "low", "key_driver": "Rain easing", "factors": ["Poor drainage infrastructure"]}
+      }
+    },
+    {
+      "id": "boeng_keng_kang",
+      "name": "Boeng Keng Kang",
+      "name_km": "បឹងកេងកង",
+      "lat": 11.545,
+      "lon": 104.925,
+      "current": {
+        "level": 0, "label": "NORMAL", "score": 8,
+        "factors": ["Low rainfall", "Dry soil conditions"],
+        "rainfall_24h_mm": 1.5, "rainfall_3d_mm": 3.5, "rainfall_7d_mm": 8.0,
+        "forecast_24h_mm": 5.0, "forecast_48h_mm": 9.0, "forecast_72h_mm": 3.0,
+        "soil_moisture": 0.20, "soil_moisture_deep": 0.26, "river_discharge_ratio": 0.72,
+        "component_scores": {"rainfall": 0, "soil": 0, "river": 0, "satellite": 0, "vulnerability": 8}
+      },
+      "forecast": {
+        "t24h": {"level": 0, "label": "NORMAL", "score": 9, "confidence": "high", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t48h": {"level": 0, "label": "NORMAL", "score": 10, "confidence": "medium", "key_driver": "Stable conditions", "factors": ["Low rainfall"]},
+        "t72h": {"level": 0, "label": "NORMAL", "score": 9, "confidence": "low", "key_driver": "Stable conditions", "factors": ["Low rainfall"]}
+      }
+    }
+  ],
+  "city_summary": {
+    "current": {"level_0": 11, "level_1": 3, "level_2": 0, "level_3": 0},
+    "t72h_worst_case": {"level_0": 6, "level_1": 7, "level_2": 1, "level_3": 0}
+  }
+}

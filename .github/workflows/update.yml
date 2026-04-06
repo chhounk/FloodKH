@@ -27,13 +27,20 @@ jobs:
 
       - name: Copy data to docs
         run: |
-          cp data/flood_status.json docs/data/flood_status.json
+          cp data/flood_predictions.json docs/data/flood_predictions.json
           cp data/flood_history.json docs/data/flood_history.json
+          cp data/geojson/phnom_penh_districts.geojson docs/data/phnom_penh_districts.geojson
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet docs/data/ data/ && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ docs/data/
-          git diff --quiet --cached || git commit -m "Update flood data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git commit -m "Update flood data $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
