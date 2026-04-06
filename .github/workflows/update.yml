@@ -1,0 +1,39 @@
+name: Update Flood Data
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        run: python -m scraper.main
+
+      - name: Copy data to docs
+        run: |
+          cp data/flood_status.json docs/data/flood_status.json
+          cp data/flood_history.json docs/data/flood_history.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ docs/data/
+          git diff --quiet --cached || git commit -m "Update flood data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
