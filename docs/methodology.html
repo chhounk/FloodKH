@@ -18,9 +18,13 @@
         </div>
         <nav>
             <a href="index.html" class="nav-btn">Map</a>
+            <a href="index.html#dashboard" class="nav-btn">Dashboard</a>
             <a href="methodology.html" class="nav-btn active">Methodology</a>
+            <a href="index.html#telegram" class="nav-btn">Telegram</a>
         </nav>
-        <div class="header-controls"><span></span></div>
+        <div class="header-controls">
+            <button id="lang-toggle" class="lang-btn">ខ្មែរ</button>
+        </div>
     </header>
 
     <div class="methodology-content">
@@ -37,8 +41,8 @@
             <tbody>
                 <tr><td><span class="level-indicator" style="background:#22c55e"></span>0</td><td>NORMAL</td><td>0-20</td><td>No flood risk. Normal conditions.</td></tr>
                 <tr><td><span class="level-indicator" style="background:#eab308"></span>1</td><td>WATCH</td><td>21-45</td><td>Elevated conditions. Heavy rain expected or soil saturating.</td></tr>
-                <tr><td><span class="level-indicator" style="background:#f97316"></span>2</td><td>WARNING</td><td>46-70</td><td>High flood risk. Flooding likely in low-lying areas.</td></tr>
-                <tr><td><span class="level-indicator" style="background:#ef4444"></span>3</td><td>EMERGENCY</td><td>71-100</td><td>Critical flood risk. Flooding imminent or active.</td></tr>
+                <tr><td><span class="level-indicator" style="background:#f97316"></span>2</td><td>WARNING</td><td>46-80</td><td>High flood risk. Flooding likely in low-lying areas.</td></tr>
+                <tr><td><span class="level-indicator" style="background:#ef4444"></span>3</td><td>EMERGENCY</td><td>81-100</td><td>Critical flood risk. Flooding imminent or active.</td></tr>
             </tbody>
         </table>
 
@@ -120,8 +124,15 @@
     </div>
 
     <footer>
-        <span>Built by <strong>Convergence</strong></span>
+        <span>Built by <strong>Kalim Chhoun</strong></span>
         <span>Data: Open-Meteo, Copernicus Sentinel, NASA GPM, GloFAS</span>
     </footer>
+
+    <script src="js/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            I18n.init();
+        });
+    </script>
 </body>
 </html>

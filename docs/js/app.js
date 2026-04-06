@@ -15,6 +15,7 @@ const App = {
             I18n.init();
             this.setupEventListeners();
             this.updateTimestamp();
+            this.handleHashNavigation();
         } catch (err) {
             this.showError('Failed to load flood data. Please try again later.');
             console.error(err);
@@ -50,7 +51,9 @@ const App = {
         document.querySelectorAll('.nav-btn[data-view]').forEach(b => b.classList.remove('active'));
         document.querySelector(`[data-view="${view}"]`)?.classList.add('active');
         document.getElementById('map-container').classList.toggle('hidden', view !== 'map');
+        document.getElementById('sidebar').classList.toggle('hidden', view === 'telegram');
         document.getElementById('dashboard-view').classList.toggle('hidden', view !== 'dashboard');
+        document.getElementById('telegram-view').classList.toggle('hidden', view !== 'telegram');
         if (view === 'map') FloodMap.map?.invalidateSize();
         if (view === 'dashboard') Dashboard.refresh();
     },
@@ -66,6 +69,13 @@ const App = {
         if (this.data?.generated_at) {
             const d = new Date(this.data.generated_at);
             el.textContent = d.toLocaleString();
+        }
+    },
+
+    handleHashNavigation() {
+        const hash = window.location.hash.replace('#', '');
+        if (['dashboard', 'telegram'].includes(hash)) {
+            this.switchView(hash);
         }
     },
 

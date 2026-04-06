@@ -14,8 +14,8 @@ components: rainfall (max 35), soil moisture (max 15), river discharge
 ALERT_THRESHOLDS = {
     0: (0, 20),    # NORMAL  — no action needed
     1: (21, 45),   # WATCH   — stay informed
-    2: (46, 70),   # WARNING — prepare / possible evacuation
-    3: (71, 100),  # EMERGENCY — immediate action required
+    2: (46, 80),   # WARNING — prepare / possible evacuation
+    3: (81, 100),  # EMERGENCY — immediate action required
 }
 
 ALERT_LABELS = {

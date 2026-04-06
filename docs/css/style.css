@@ -495,7 +495,8 @@ main {
   color: #4a90d9;
   font-size: 11px;
   font-style: italic;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  font-weight: 600;
+  text-shadow: 0 0 4px #fff, 0 0 4px #fff, 1px 1px 2px rgba(0,0,0,0.3);
   white-space: nowrap;
 }
 
@@ -672,4 +673,105 @@ footer strong { color: var(--text-secondary); }
 
   .dashboard-grid { grid-template-columns: 1fr; }
   .methodology-content { margin-top: 70px; padding: 0 16px; }
+}
+
+/* ---------------------------------------------------------------------------
+   Hover Tooltip (map)
+   --------------------------------------------------------------------------- */
+.coord-display {
+    position: absolute;
+    z-index: 800;
+    background: rgba(17, 24, 39, 0.92);
+    border: 1px solid #2a3548;
+    border-radius: 8px;
+    padding: 8px 12px;
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: #e0e6f0;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.hover-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.hover-level {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+.hover-detail {
+    color: #8892a4;
+    font-size: 0.75rem;
+}
+.coord-latlon {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.7rem;
+    color: #5a6478;
+}
+
+/* ---------------------------------------------------------------------------
+   Telegram Coming Soon View
+   --------------------------------------------------------------------------- */
+.telegram-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+}
+.telegram-view.hidden { display: none; }
+
+.coming-soon {
+    text-align: center;
+    max-width: 440px;
+    padding: 48px 32px;
+}
+.coming-soon-icon {
+    margin-bottom: 24px;
+    opacity: 0.9;
+}
+.coming-soon h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+.coming-soon-subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.coming-soon-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+.coming-soon-features {
+    text-align: left;
+    display: inline-block;
+}
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.feature-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    flex-shrink: 0;
 }

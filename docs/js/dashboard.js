@@ -122,10 +122,16 @@ const Dashboard = {
     updateForTimeStep(step) {
         this.renderSummaryCards(step);
         this.renderDistrictRanking(step);
+        this._renderDonut(step);
+        this._renderScores(step);
     },
 
     refresh() {
         this.renderDashboardCharts();
+    },
+
+    _getInfo(d, step) {
+        return step === 'current' ? d.current : d.forecast?.[step];
     },
 
     renderDashboardCharts() {
@@ -141,16 +147,21 @@ const Dashboard = {
         `;
 
         I18n.applyTranslations();
-        this._renderDonut();
+        const step = App.currentTimeStep;
+        this._renderDonut(step);
         this._renderRainfall();
-        this._renderScores();
+        this._renderScores(step);
     },
 
-    _renderDonut() {
+    _renderDonut(step) {
         const ctx = document.getElementById('chart-donut');
         if (!ctx) return;
+        step = step || App.currentTimeStep;
         const counts = { 0: 0, 1: 0, 2: 0, 3: 0 };
-        (this.data?.districts || []).forEach(d => { counts[d.current?.level ?? 0]++; });
+        (this.data?.districts || []).forEach(d => {
+            const info = this._getInfo(d, step);
+            counts[info?.level ?? 0]++;
+        });
         if (this.charts.donut) this.charts.donut.destroy();
         this.charts.donut = new Chart(ctx, {
             type: 'doughnut',
@@ -183,17 +194,27 @@ const Dashboard = {
         });
     },
 
-    _renderScores() {
+    _renderScores(step) {
         const ctx = document.getElementById('chart-scores');
         if (!ctx) return;
-        const sorted = [...(this.data?.districts || [])].sort((a, b) => (b.current?.score || 0) - (a.current?.score || 0));
+        step = step || App.currentTimeStep;
         const colors = { 0: '#22c55e', 1: '#eab308', 2: '#f97316', 3: '#ef4444' };
+        const sorted = [...(this.data?.districts || [])].sort((a, b) => {
+            const sa = this._getInfo(a, step)?.score || 0;
+            const sb = this._getInfo(b, step)?.score || 0;
+            return sb - sa;
+        });
         if (this.charts.scores) this.charts.scores.destroy();
         this.charts.scores = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: sorted.map(d => d.name),
-                datasets: [{ label: 'Risk Score', data: sorted.map(d => d.current?.score || 0), backgroundColor: sorted.map(d => colors[d.current?.level || 0]), borderWidth: 0 }]
+                datasets: [{
+                    label: 'Risk Score',
+                    data: sorted.map(d => this._getInfo(d, step)?.score || 0),
+                    backgroundColor: sorted.map(d => colors[this._getInfo(d, step)?.level || 0]),
+                    borderWidth: 0
+                }]
             },
             options: {
                 indexAxis: 'y',

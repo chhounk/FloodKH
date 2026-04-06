@@ -13,17 +13,17 @@ const FloodMap = {
             center: [11.56, 104.92],
             zoom: 12,
             zoomControl: true,
-            attributionControl: true
+            attributionControl: false
         });
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap &copy; CARTO',
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18
         }).addTo(this.map);
 
         this.loadDistricts();
         this.addLegend();
         this.addRiverLabels();
+        this.addCoordinateDisplay();
     },
 
     async loadDistricts() {
@@ -38,9 +38,14 @@ const FloodMap = {
                     layer.on('click', () => this.showDistrictPopup(feature.properties.id));
                     layer.on('mouseover', (e) => {
                         e.target.setStyle({ weight: 3, fillOpacity: 0.6 });
+                        this.showHoverInfo(feature.properties.id, e);
                     });
                     layer.on('mouseout', (e) => {
                         e.target.setStyle(this.getDistrictStyle(feature.properties.id));
+                        this.hideHoverInfo();
+                    });
+                    layer.on('mousemove', (e) => {
+                        this.updateHoverPosition(e);
                     });
                 }
             }).addTo(this.map);
@@ -166,6 +171,67 @@ const FloodMap = {
                 interactive: false
             }).addTo(this.map);
         });
+    },
+
+    addCoordinateDisplay() {
+        const coordDiv = L.DomUtil.create('div', 'coord-display');
+        coordDiv.id = 'coord-display';
+        coordDiv.style.display = 'none';
+        document.getElementById('map-container').appendChild(coordDiv);
+
+        this.map.on('mousemove', (e) => {
+            coordDiv.style.display = 'block';
+            coordDiv.style.left = (e.containerPoint.x + 15) + 'px';
+            coordDiv.style.top = (e.containerPoint.y + 15) + 'px';
+            if (!this._hoverDistrict) {
+                coordDiv.innerHTML = `<span class="coord-latlon">${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}</span>`;
+            }
+        });
+
+        this.map.on('mouseout', () => {
+            coordDiv.style.display = 'none';
+        });
+    },
+
+    _hoverDistrict: null,
+
+    showHoverInfo(districtId, e) {
+        this._hoverDistrict = districtId;
+        const d = this.getDistrictData(districtId);
+        if (!d) return;
+        const step = App.currentTimeStep;
+        const info = step === 'current' ? d.current : d.forecast?.[step];
+        const level = info?.level ?? 0;
+        const labels = { 0: 'NORMAL', 1: 'WATCH', 2: 'WARNING', 3: 'EMERGENCY' };
+        const colors = { 0: '#22c55e', 1: '#eab308', 2: '#f97316', 3: '#ef4444' };
+        const coordDiv = document.getElementById('coord-display');
+        if (coordDiv) {
+            coordDiv.innerHTML = `
+                <div class="hover-title">${d.name} <span style="color:${colors[level]}">${d.name_km}</span></div>
+                <div class="hover-level" style="color:${colors[level]}">${labels[level]} (${info?.score ?? 0}/100)</div>
+                <div class="hover-detail">Rain 24h: ${d.current?.rainfall_24h_mm ?? '--'}mm</div>
+                <div class="hover-detail">Soil: ${d.current?.soil_moisture != null ? (d.current.soil_moisture * 100).toFixed(0) + '%' : '--'}</div>
+                <div class="hover-detail">River: ${d.current?.river_discharge_ratio != null ? d.current.river_discharge_ratio.toFixed(2) + '\u00d7 avg' : '--'}</div>
+                <span class="coord-latlon">${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}</span>
+            `;
+        }
+    },
+
+    hideHoverInfo() {
+        this._hoverDistrict = null;
+    },
+
+    updateHoverPosition(e) {
+        const coordDiv = document.getElementById('coord-display');
+        if (coordDiv) {
+            coordDiv.style.left = (e.containerPoint.x + 15) + 'px';
+            coordDiv.style.top = (e.containerPoint.y + 15) + 'px';
+            if (this._hoverDistrict) {
+                const d = this.getDistrictData(this._hoverDistrict);
+                const latlon = coordDiv.querySelector('.coord-latlon');
+                if (latlon) latlon.textContent = `${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`;
+            }
+        }
     },
 
     flyTo(lat, lon, zoom) {
