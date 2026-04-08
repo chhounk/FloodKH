@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-08T13:13:33.049946+00:00",
+  "generated_at": "2026-04-08T19:11:13.896077+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -1311,14 +1311,14 @@
           "vulnerability": 4
         },
         "factors": [
-          "Dry conditions"
+          "Low rainfall"
         ],
-        "rainfall_24h_mm": null,
-        "rainfall_3d_mm": null,
-        "rainfall_7d_mm": null,
-        "forecast_24h_mm": null,
-        "forecast_48h_mm": null,
-        "forecast_72h_mm": null,
+        "rainfall_24h_mm": 0.0,
+        "rainfall_3d_mm": 0.0,
+        "rainfall_7d_mm": 0.0,
+        "forecast_24h_mm": 0.0,
+        "forecast_48h_mm": 0.0,
+        "forecast_72h_mm": 0.0,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1340,7 +1340,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Dry conditions"
+            "Low rainfall"
           ]
         },
         "t48h": {
@@ -1359,7 +1359,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Dry conditions"
+            "Low rainfall"
           ]
         },
         "t72h": {
@@ -1378,7 +1378,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Dry conditions"
+            "Low rainfall"
           ]
         }
       }
