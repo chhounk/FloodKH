@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T18:41:13.678981+00:00",
+  "generated_at": "2026-04-13T02:13:49.666631+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -909,7 +909,7 @@
         "rainfall_7d_mm": 0.0,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.0,
+        "forecast_72h_mm": 0.1,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
