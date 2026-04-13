@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T02:13:49.666631+00:00",
+  "generated_at": "2026-04-13T07:57:03.566995+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -909,7 +909,7 @@
         "rainfall_7d_mm": 0.0,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.0,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1105,17 +1105,16 @@
           "vulnerability": 15
         },
         "factors": [
-          "Low rainfall",
           "Poor drainage infrastructure",
           "Low elevation (6.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.0,
-        "rainfall_3d_mm": 0.0,
-        "rainfall_7d_mm": 0.0,
-        "forecast_24h_mm": 0.0,
-        "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.0,
+        "rainfall_24h_mm": null,
+        "rainfall_3d_mm": null,
+        "rainfall_7d_mm": null,
+        "forecast_24h_mm": null,
+        "forecast_48h_mm": null,
+        "forecast_72h_mm": null,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1137,7 +1136,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
             "High flood history area"
@@ -1159,7 +1157,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
             "High flood history area"
@@ -1181,7 +1178,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
             "High flood history area"
@@ -1208,17 +1204,16 @@
           "vulnerability": 15
         },
         "factors": [
-          "Low rainfall",
           "Poor drainage infrastructure",
           "Low elevation (9.0 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.0,
-        "rainfall_3d_mm": 0.0,
-        "rainfall_7d_mm": 0.0,
-        "forecast_24h_mm": 0.0,
-        "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.0,
+        "rainfall_24h_mm": null,
+        "rainfall_3d_mm": null,
+        "rainfall_7d_mm": null,
+        "forecast_24h_mm": null,
+        "forecast_48h_mm": null,
+        "forecast_72h_mm": null,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1240,7 +1235,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
@@ -1262,7 +1256,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
@@ -1284,7 +1277,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
@@ -1311,14 +1303,14 @@
           "vulnerability": 4
         },
         "factors": [
-          "Low rainfall"
+          "Dry conditions"
         ],
-        "rainfall_24h_mm": 0.0,
-        "rainfall_3d_mm": 0.0,
-        "rainfall_7d_mm": 0.0,
-        "forecast_24h_mm": 0.0,
-        "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.0,
+        "rainfall_24h_mm": null,
+        "rainfall_3d_mm": null,
+        "rainfall_7d_mm": null,
+        "forecast_24h_mm": null,
+        "forecast_48h_mm": null,
+        "forecast_72h_mm": null,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1340,7 +1332,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Low rainfall"
+            "Dry conditions"
           ]
         },
         "t48h": {
@@ -1359,7 +1351,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Low rainfall"
+            "Dry conditions"
           ]
         },
         "t72h": {
@@ -1378,7 +1370,7 @@
             "vulnerability": 4
           },
           "factors": [
-            "Low rainfall"
+            "Dry conditions"
           ]
         }
       }
