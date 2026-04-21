@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-21T07:29:25.113353+00:00",
+  "generated_at": "2026-04-21T13:17:04.397783+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -30,8 +30,8 @@
         "factors": [
           "Low rainfall"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
+        "rainfall_24h_mm": 0.6,
+        "rainfall_3d_mm": 6.6,
         "rainfall_7d_mm": 8.1,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -123,8 +123,8 @@
           "Poor drainage infrastructure",
           "Low elevation (9.0 m)"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -220,8 +220,8 @@
         "factors": [
           "Low rainfall"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -311,8 +311,8 @@
         "factors": [
           "Low rainfall"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -405,8 +405,8 @@
           "Low elevation (7.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
+        "rainfall_24h_mm": 0.6,
+        "rainfall_3d_mm": 6.6,
         "rainfall_7d_mm": 8.1,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -508,8 +508,8 @@
           "Low elevation (8.0 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
+        "rainfall_24h_mm": 0.6,
+        "rainfall_3d_mm": 6.6,
         "rainfall_7d_mm": 8.1,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -610,8 +610,8 @@
           "Poor drainage infrastructure",
           "Low elevation (9.5 m)"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -709,8 +709,8 @@
           "Poor drainage infrastructure",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -807,8 +807,8 @@
           "Low rainfall",
           "Poor drainage infrastructure"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
+        "rainfall_24h_mm": 0.6,
+        "rainfall_3d_mm": 6.6,
         "rainfall_7d_mm": 8.1,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -904,8 +904,8 @@
           "Low elevation (7.0 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 3.5,
+        "rainfall_24h_mm": 0.2,
+        "rainfall_3d_mm": 3.4,
         "rainfall_7d_mm": 5.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -1007,8 +1007,8 @@
           "Low elevation (8.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.3,
-        "rainfall_3d_mm": 11.2,
+        "rainfall_24h_mm": 0.1,
+        "rainfall_3d_mm": 10.9,
         "rainfall_7d_mm": 13.2,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -1110,8 +1110,8 @@
           "Low elevation (6.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
+        "rainfall_24h_mm": 0.6,
+        "rainfall_3d_mm": 6.6,
         "rainfall_7d_mm": 8.1,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
@@ -1208,17 +1208,16 @@
           "vulnerability": 15
         },
         "factors": [
-          "Low rainfall",
           "Poor drainage infrastructure",
           "Low elevation (9.0 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": 0.8,
-        "rainfall_3d_mm": 6.8,
-        "rainfall_7d_mm": 8.1,
-        "forecast_24h_mm": 0.0,
-        "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.0,
+        "rainfall_24h_mm": null,
+        "rainfall_3d_mm": null,
+        "rainfall_7d_mm": null,
+        "forecast_24h_mm": null,
+        "forecast_48h_mm": null,
+        "forecast_72h_mm": null,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -1240,7 +1239,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
@@ -1262,7 +1260,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
@@ -1284,7 +1281,6 @@
             "vulnerability": 15
           },
           "factors": [
-            "Low rainfall",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
             "High flood history area"
