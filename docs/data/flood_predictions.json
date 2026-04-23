@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T02:12:07.217773+00:00",
+  "generated_at": "2026-04-23T07:45:29.905812+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -128,7 +128,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -225,7 +225,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -316,7 +316,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -615,7 +615,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -714,7 +714,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
@@ -906,7 +906,7 @@
         ],
         "rainfall_24h_mm": 0.0,
         "rainfall_3d_mm": 0.3,
-        "rainfall_7d_mm": 3.9,
+        "rainfall_7d_mm": 3.8,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
         "forecast_72h_mm": 0.0,
@@ -1012,7 +1012,7 @@
         "rainfall_7d_mm": 11.6,
         "forecast_24h_mm": 0.0,
         "forecast_48h_mm": 0.0,
-        "forecast_72h_mm": 0.1,
+        "forecast_72h_mm": 0.8,
         "soil_moisture": null,
         "soil_moisture_deep": null,
         "river_discharge_ratio": null
