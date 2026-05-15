@@ -2384,15 +2384,15 @@
       "districts": {
         "chamkarmon": {
           "level": 0,
-          "score": 8
+          "score": 11
         },
         "daun_penh": {
           "level": 0,
-          "score": 13
+          "score": 16
         },
         "prampir_makara": {
           "level": 0,
-          "score": 7
+          "score": 10
         },
         "tuol_kork": {
           "level": 0,
@@ -2423,8 +2423,8 @@
           "score": 19
         },
         "prek_pnov": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 21
         },
         "chbar_ampov": {
           "level": 0,
