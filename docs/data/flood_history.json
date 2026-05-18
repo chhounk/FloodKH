@@ -2579,7 +2579,7 @@
         },
         "tuol_kork": {
           "level": 0,
-          "score": 10
+          "score": 13
         },
         "dangkor": {
           "level": 1,
@@ -2590,36 +2590,36 @@
           "score": 19
         },
         "russey_keo": {
-          "level": 0,
-          "score": 16
+          "level": 1,
+          "score": 22
         },
         "sen_sok": {
           "level": 0,
-          "score": 17
+          "score": 20
         },
         "pou_senchey": {
           "level": 0,
-          "score": 14
+          "score": 17
         },
         "chroy_changvar": {
           "level": 0,
           "score": 16
         },
         "prek_pnov": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 24
         },
         "chbar_ampov": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 21
         },
         "kamboul": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 21
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 4
+          "score": 10
         }
       }
     }
