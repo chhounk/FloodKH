@@ -2994,23 +2994,23 @@
       "districts": {
         "chamkarmon": {
           "level": 0,
-          "score": 13
+          "score": 8
         },
         "daun_penh": {
           "level": 0,
-          "score": 18
+          "score": 13
         },
         "prampir_makara": {
           "level": 0,
-          "score": 12
+          "score": 7
         },
         "tuol_kork": {
           "level": 0,
           "score": 16
         },
         "dangkor": {
-          "level": 1,
-          "score": 24
+          "level": 0,
+          "score": 20
         },
         "mean_chey": {
           "level": 0,
@@ -3021,8 +3021,8 @@
           "score": 18
         },
         "sen_sok": {
-          "level": 0,
-          "score": 19
+          "level": 1,
+          "score": 23
         },
         "pou_senchey": {
           "level": 0,
