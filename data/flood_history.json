@@ -3400,19 +3400,19 @@
         },
         "prek_pnov": {
           "level": 0,
-          "score": 15
+          "score": 18
         },
         "chbar_ampov": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 21
         },
         "kamboul": {
-          "level": 0,
-          "score": 15
+          "level": 1,
+          "score": 21
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 4
+          "score": 10
         }
       }
     }
