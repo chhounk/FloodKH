@@ -3798,12 +3798,12 @@
           "score": 12
         },
         "tuol_kork": {
-          "level": 1,
-          "score": 24
+          "level": 0,
+          "score": 20
         },
         "dangkor": {
           "level": 1,
-          "score": 35
+          "score": 25
         },
         "mean_chey": {
           "level": 0,
@@ -3815,7 +3815,7 @@
         },
         "sen_sok": {
           "level": 1,
-          "score": 31
+          "score": 27
         },
         "pou_senchey": {
           "level": 1,
@@ -3834,8 +3834,8 @@
           "score": 20
         },
         "kamboul": {
-          "level": 1,
-          "score": 31
+          "level": 0,
+          "score": 20
         },
         "boeng_keng_kang": {
           "level": 0,
