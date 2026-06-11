@@ -4038,12 +4038,12 @@
           "score": 30
         },
         "prampir_makara": {
-          "level": 0,
-          "score": 20
-        },
-        "tuol_kork": {
           "level": 1,
           "score": 24
+        },
+        "tuol_kork": {
+          "level": 0,
+          "score": 20
         },
         "dangkor": {
           "level": 1,
@@ -4063,19 +4063,19 @@
         },
         "pou_senchey": {
           "level": 1,
-          "score": 24
+          "score": 28
         },
         "chroy_changvar": {
           "level": 1,
           "score": 26
         },
         "prek_pnov": {
-          "level": 1,
-          "score": 31
+          "level": 0,
+          "score": 20
         },
         "chbar_ampov": {
-          "level": 1,
-          "score": 32
+          "level": 0,
+          "score": 20
         },
         "kamboul": {
           "level": 0,
