@@ -4152,8 +4152,8 @@
       "date": "2026-06-13",
       "districts": {
         "chamkarmon": {
-          "level": 1,
-          "score": 22
+          "level": 0,
+          "score": 18
         },
         "daun_penh": {
           "level": 1,
@@ -4164,8 +4164,8 @@
           "score": 17
         },
         "tuol_kork": {
-          "level": 0,
-          "score": 17
+          "level": 1,
+          "score": 21
         },
         "dangkor": {
           "level": 1,
@@ -4189,11 +4189,11 @@
         },
         "chroy_changvar": {
           "level": 1,
-          "score": 23
+          "score": 27
         },
         "prek_pnov": {
           "level": 1,
-          "score": 29
+          "score": 25
         },
         "chbar_ampov": {
           "level": 1,
@@ -4205,7 +4205,7 @@
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 18
+          "score": 14
         }
       }
     }
