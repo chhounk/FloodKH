@@ -4221,36 +4221,36 @@
           "score": 27
         },
         "prampir_makara": {
-          "level": 1,
-          "score": 21
+          "level": 0,
+          "score": 17
         },
         "tuol_kork": {
-          "level": 0,
-          "score": 20
-        },
-        "dangkor": {
-          "level": 1,
-          "score": 28
-        },
-        "mean_chey": {
-          "level": 1,
-          "score": 30
-        },
-        "russey_keo": {
-          "level": 1,
-          "score": 33
-        },
-        "sen_sok": {
-          "level": 1,
-          "score": 31
-        },
-        "pou_senchey": {
           "level": 1,
           "score": 24
         },
-        "chroy_changvar": {
+        "dangkor": {
+          "level": 1,
+          "score": 32
+        },
+        "mean_chey": {
           "level": 1,
           "score": 26
+        },
+        "russey_keo": {
+          "level": 0,
+          "score": 18
+        },
+        "sen_sok": {
+          "level": 0,
+          "score": 19
+        },
+        "pou_senchey": {
+          "level": 0,
+          "score": 16
+        },
+        "chroy_changvar": {
+          "level": 0,
+          "score": 18
         },
         "prek_pnov": {
           "level": 1,
@@ -4258,11 +4258,11 @@
         },
         "chbar_ampov": {
           "level": 1,
-          "score": 28
+          "score": 32
         },
         "kamboul": {
           "level": 1,
-          "score": 32
+          "score": 28
         },
         "boeng_keng_kang": {
           "level": 0,
