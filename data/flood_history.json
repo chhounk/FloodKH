@@ -4336,31 +4336,31 @@
       "districts": {
         "chamkarmon": {
           "level": 1,
-          "score": 21
+          "score": 24
         },
         "daun_penh": {
           "level": 1,
-          "score": 30
+          "score": 33
         },
         "prampir_makara": {
           "level": 1,
-          "score": 24
+          "score": 27
         },
         "tuol_kork": {
           "level": 0,
-          "score": 15
+          "score": 19
         },
         "dangkor": {
           "level": 1,
-          "score": 31
+          "score": 38
         },
         "mean_chey": {
           "level": 1,
-          "score": 27
+          "score": 33
         },
         "russey_keo": {
           "level": 1,
-          "score": 27
+          "score": 24
         },
         "sen_sok": {
           "level": 1,
@@ -4376,19 +4376,19 @@
         },
         "prek_pnov": {
           "level": 1,
-          "score": 29
+          "score": 26
         },
         "chbar_ampov": {
           "level": 1,
-          "score": 25
+          "score": 35
         },
         "kamboul": {
           "level": 1,
-          "score": 31
+          "score": 34
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 17
+          "score": 9
         }
       }
     }
