@@ -4897,11 +4897,11 @@
         },
         "tuol_kork": {
           "level": 0,
-          "score": 12
+          "score": 15
         },
         "dangkor": {
           "level": 1,
-          "score": 25
+          "score": 32
         },
         "mean_chey": {
           "level": 0,
@@ -4912,12 +4912,12 @@
           "score": 18
         },
         "sen_sok": {
-          "level": 0,
-          "score": 19
+          "level": 1,
+          "score": 22
         },
         "pou_senchey": {
           "level": 0,
-          "score": 16
+          "score": 19
         },
         "chroy_changvar": {
           "level": 0,
@@ -4933,7 +4933,7 @@
         },
         "kamboul": {
           "level": 1,
-          "score": 29
+          "score": 32
         },
         "boeng_keng_kang": {
           "level": 0,
