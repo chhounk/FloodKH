@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T13:27:22.254476+00:00",
+  "generated_at": "2026-06-28T19:12:25.616199+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -19,12 +19,12 @@
         "district_id": "chamkarmon",
         "level": 1,
         "label": "WATCH",
-        "score": 24,
+        "score": 28,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 0,
+          "satellite": 4,
           "vulnerability": 8
         },
         "factors": [
@@ -37,24 +37,24 @@
         "forecast_24h_mm": 5.8,
         "forecast_48h_mm": 4.8,
         "forecast_72h_mm": 2.8,
-        "soil_moisture": 0.36,
-        "soil_moisture_deep": 0.18,
+        "soil_moisture": 0.34,
+        "soil_moisture_deep": 0.19,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 24,
-          "score_low": 21,
-          "score_high": 26,
+          "score": 28,
+          "score_low": 25,
+          "score_high": 30,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 8
           },
           "factors": [
@@ -65,16 +65,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 24,
-          "score_low": 19,
-          "score_high": 28,
+          "score": 28,
+          "score_low": 22,
+          "score_high": 33,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 8
           },
           "factors": [
@@ -89,12 +89,12 @@
           "score_low": 19,
           "score_high": 36,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 8
           },
           "factors": [
@@ -114,12 +114,12 @@
         "district_id": "daun_penh",
         "level": 1,
         "label": "WATCH",
-        "score": 33,
+        "score": 29,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 4,
+          "satellite": 0,
           "vulnerability": 13
         },
         "factors": [
@@ -134,24 +134,24 @@
         "forecast_24h_mm": 5.8,
         "forecast_48h_mm": 4.8,
         "forecast_72h_mm": 2.8,
-        "soil_moisture": 0.36,
-        "soil_moisture_deep": 0.18,
+        "soil_moisture": 0.34,
+        "soil_moisture_deep": 0.19,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 33,
-          "score_low": 29,
-          "score_high": 36,
+          "score": 29,
+          "score_low": 26,
+          "score_high": 31,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 13
           },
           "factors": [
@@ -164,16 +164,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 33,
-          "score_low": 26,
-          "score_high": 39,
+          "score": 29,
+          "score_low": 23,
+          "score_high": 34,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 13
           },
           "factors": [
@@ -186,16 +186,16 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 37,
-          "score_low": 25,
-          "score_high": 48,
+          "score": 29,
+          "score_low": 20,
+          "score_high": 37,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 13
           },
           "factors": [
@@ -235,8 +235,8 @@
         "forecast_24h_mm": 5.8,
         "forecast_48h_mm": 4.8,
         "forecast_72h_mm": 2.8,
-        "soil_moisture": 0.36,
-        "soil_moisture_deep": 0.18,
+        "soil_moisture": 0.34,
+        "soil_moisture_deep": 0.19,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -283,14 +283,14 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 31,
-          "score_low": 21,
-          "score_high": 40,
+          "score": 27,
+          "score_low": 18,
+          "score_high": 35,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
             "satellite": 4,
             "vulnerability": 7
@@ -312,12 +312,12 @@
         "district_id": "tuol_kork",
         "level": 1,
         "label": "WATCH",
-        "score": 23,
+        "score": 27,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 0,
+          "satellite": 4,
           "vulnerability": 7
         },
         "factors": [
@@ -330,7 +330,7 @@
         "forecast_24h_mm": 2.6,
         "forecast_48h_mm": 3.6,
         "forecast_72h_mm": 3.3,
-        "soil_moisture": 0.35,
+        "soil_moisture": 0.32,
         "soil_moisture_deep": 0.17,
         "river_discharge_ratio": 0.0
       },
@@ -338,16 +338,16 @@
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 23,
-          "score_low": 20,
-          "score_high": 25,
+          "score": 27,
+          "score_low": 24,
+          "score_high": 29,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 7
           },
           "factors": [
@@ -358,16 +358,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 23,
-          "score_low": 18,
-          "score_high": 27,
+          "score": 27,
+          "score_low": 21,
+          "score_high": 32,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 7
           },
           "factors": [
@@ -382,12 +382,12 @@
           "score_low": 18,
           "score_high": 35,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 7
           },
           "factors": [
@@ -426,9 +426,9 @@
         "rainfall_3d_mm": 22.4,
         "rainfall_7d_mm": 37.8,
         "forecast_24h_mm": 4.2,
-        "forecast_48h_mm": 2.7,
-        "forecast_72h_mm": 4.8,
-        "soil_moisture": 0.37,
+        "forecast_48h_mm": 2.9,
+        "forecast_72h_mm": 4.6,
+        "soil_moisture": 0.35,
         "soil_moisture_deep": 0.27,
         "river_discharge_ratio": 0.0
       },
@@ -482,14 +482,14 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 39,
-          "score_low": 27,
-          "score_high": 50,
+          "score": 35,
+          "score_low": 24,
+          "score_high": 45,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
             "satellite": 4,
             "vulnerability": 15
@@ -514,12 +514,12 @@
         "district_id": "mean_chey",
         "level": 1,
         "label": "WATCH",
-        "score": 29,
+        "score": 33,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 0,
+          "satellite": 4,
           "vulnerability": 13
         },
         "factors": [
@@ -533,26 +533,26 @@
         "rainfall_3d_mm": 21.4,
         "rainfall_7d_mm": 33.5,
         "forecast_24h_mm": 4.7,
-        "forecast_48h_mm": 2.9,
-        "forecast_72h_mm": 5.2,
-        "soil_moisture": 0.33,
-        "soil_moisture_deep": 0.15,
+        "forecast_48h_mm": 3.0,
+        "forecast_72h_mm": 5.1,
+        "soil_moisture": 0.32,
+        "soil_moisture_deep": 0.16,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 29,
-          "score_low": 26,
-          "score_high": 31,
+          "score": 33,
+          "score_low": 29,
+          "score_high": 36,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 13
           },
           "factors": [
@@ -566,16 +566,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 29,
-          "score_low": 23,
-          "score_high": 34,
+          "score": 33,
+          "score_low": 26,
+          "score_high": 39,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 13
           },
           "factors": [
@@ -589,16 +589,16 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 29,
-          "score_low": 20,
-          "score_high": 37,
+          "score": 33,
+          "score_low": 23,
+          "score_high": 42,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 13
           },
           "factors": [
@@ -641,8 +641,8 @@
         "forecast_24h_mm": 5.6,
         "forecast_48h_mm": 3.6,
         "forecast_72h_mm": 1.3,
-        "soil_moisture": 0.38,
-        "soil_moisture_deep": 0.24,
+        "soil_moisture": 0.36,
+        "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -724,12 +724,12 @@
         "district_id": "sen_sok",
         "level": 1,
         "label": "WATCH",
-        "score": 34,
+        "score": 30,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 4,
+          "satellite": 0,
           "vulnerability": 14
         },
         "factors": [
@@ -744,7 +744,7 @@
         "forecast_24h_mm": 2.6,
         "forecast_48h_mm": 3.6,
         "forecast_72h_mm": 3.3,
-        "soil_moisture": 0.35,
+        "soil_moisture": 0.32,
         "soil_moisture_deep": 0.17,
         "river_discharge_ratio": 0.0
       },
@@ -752,16 +752,16 @@
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 34,
-          "score_low": 30,
-          "score_high": 37,
+          "score": 30,
+          "score_low": 27,
+          "score_high": 33,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 14
           },
           "factors": [
@@ -774,16 +774,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 34,
-          "score_low": 27,
-          "score_high": 40,
+          "score": 30,
+          "score_low": 24,
+          "score_high": 36,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 14
           },
           "factors": [
@@ -796,16 +796,16 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 38,
-          "score_low": 26,
-          "score_high": 49,
+          "score": 30,
+          "score_low": 21,
+          "score_high": 39,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 14
           },
           "factors": [
@@ -827,12 +827,12 @@
         "district_id": "pou_senchey",
         "level": 1,
         "label": "WATCH",
-        "score": 31,
+        "score": 27,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 4,
+          "satellite": 0,
           "vulnerability": 11
         },
         "factors": [
@@ -846,7 +846,7 @@
         "forecast_24h_mm": 2.6,
         "forecast_48h_mm": 3.6,
         "forecast_72h_mm": 3.3,
-        "soil_moisture": 0.35,
+        "soil_moisture": 0.32,
         "soil_moisture_deep": 0.17,
         "river_discharge_ratio": 0.0
       },
@@ -854,16 +854,16 @@
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 31,
-          "score_low": 27,
-          "score_high": 34,
+          "score": 27,
+          "score_low": 24,
+          "score_high": 29,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 11
           },
           "factors": [
@@ -875,16 +875,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 31,
-          "score_low": 24,
-          "score_high": 37,
+          "score": 27,
+          "score_low": 21,
+          "score_high": 32,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 11
           },
           "factors": [
@@ -896,16 +896,16 @@
         "t72h": {
           "level": 1,
           "label": "WATCH",
-          "score": 35,
-          "score_low": 24,
-          "score_high": 45,
+          "score": 27,
+          "score_low": 18,
+          "score_high": 35,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 4,
+            "satellite": 0,
             "vulnerability": 11
           },
           "factors": [
@@ -947,8 +947,8 @@
         "forecast_24h_mm": 5.5,
         "forecast_48h_mm": 4.3,
         "forecast_72h_mm": 1.5,
-        "soil_moisture": 0.38,
-        "soil_moisture_deep": 0.24,
+        "soil_moisture": 0.36,
+        "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1054,8 +1054,8 @@
         "forecast_24h_mm": 5.6,
         "forecast_48h_mm": 3.6,
         "forecast_72h_mm": 1.3,
-        "soil_moisture": 0.38,
-        "soil_moisture_deep": 0.24,
+        "soil_moisture": 0.36,
+        "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1159,10 +1159,10 @@
         "rainfall_3d_mm": 21.4,
         "rainfall_7d_mm": 33.5,
         "forecast_24h_mm": 4.7,
-        "forecast_48h_mm": 2.9,
-        "forecast_72h_mm": 5.2,
-        "soil_moisture": 0.33,
-        "soil_moisture_deep": 0.15,
+        "forecast_48h_mm": 3.0,
+        "forecast_72h_mm": 5.1,
+        "soil_moisture": 0.32,
+        "soil_moisture_deep": 0.16,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1247,12 +1247,12 @@
         "district_id": "kamboul",
         "level": 1,
         "label": "WATCH",
-        "score": 31,
+        "score": 35,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 0,
+          "satellite": 4,
           "vulnerability": 15
         },
         "factors": [
@@ -1266,9 +1266,9 @@
         "rainfall_3d_mm": 22.4,
         "rainfall_7d_mm": 37.8,
         "forecast_24h_mm": 4.2,
-        "forecast_48h_mm": 2.7,
-        "forecast_72h_mm": 4.8,
-        "soil_moisture": 0.37,
+        "forecast_48h_mm": 2.9,
+        "forecast_72h_mm": 4.6,
+        "soil_moisture": 0.35,
         "soil_moisture_deep": 0.27,
         "river_discharge_ratio": 0.0
       },
@@ -1276,16 +1276,16 @@
         "t24h": {
           "level": 1,
           "label": "WATCH",
-          "score": 31,
-          "score_low": 27,
-          "score_high": 34,
+          "score": 35,
+          "score_low": 31,
+          "score_high": 38,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 15
           },
           "factors": [
@@ -1299,16 +1299,16 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 31,
-          "score_low": 24,
-          "score_high": 37,
+          "score": 35,
+          "score_low": 28,
+          "score_high": 42,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 15
           },
           "factors": [
@@ -1326,12 +1326,12 @@
           "score_low": 24,
           "score_high": 45,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 15
           },
           "factors": [
@@ -1352,14 +1352,14 @@
       "lon": 104.925,
       "current": {
         "district_id": "boeng_keng_kang",
-        "level": 0,
-        "label": "NORMAL",
-        "score": 20,
+        "level": 1,
+        "label": "WATCH",
+        "score": 24,
         "component_scores": {
           "rainfall": 5,
           "soil": 6,
           "river": 5,
-          "satellite": 0,
+          "satellite": 4,
           "vulnerability": 4
         },
         "factors": [
@@ -1372,24 +1372,24 @@
         "forecast_24h_mm": 5.8,
         "forecast_48h_mm": 4.8,
         "forecast_72h_mm": 2.8,
-        "soil_moisture": 0.36,
-        "soil_moisture_deep": 0.18,
+        "soil_moisture": 0.34,
+        "soil_moisture_deep": 0.19,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
         "t24h": {
-          "level": 0,
-          "label": "NORMAL",
-          "score": 20,
-          "score_low": 18,
-          "score_high": 22,
+          "level": 1,
+          "label": "WATCH",
+          "score": 24,
+          "score_low": 21,
+          "score_high": 26,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 4
           },
           "factors": [
@@ -1398,18 +1398,18 @@
           ]
         },
         "t48h": {
-          "level": 0,
-          "label": "NORMAL",
-          "score": 20,
-          "score_low": 16,
-          "score_high": 24,
+          "level": 1,
+          "label": "WATCH",
+          "score": 24,
+          "score_low": 19,
+          "score_high": 28,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
             "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 4
           },
           "factors": [
@@ -1424,12 +1424,12 @@
           "score_low": 16,
           "score_high": 31,
           "confidence": "low",
-          "key_driver": "Rising soil moisture",
+          "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
             "rainfall": 5,
-            "soil": 10,
+            "soil": 6,
             "river": 5,
-            "satellite": 0,
+            "satellite": 4,
             "vulnerability": 4
           },
           "factors": [
@@ -1442,8 +1442,8 @@
   ],
   "city_summary": {
     "current": {
-      "level_0": 1,
-      "level_1": 13,
+      "level_0": 0,
+      "level_1": 14,
       "level_2": 0,
       "level_3": 0
     },
