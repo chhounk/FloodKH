@@ -5123,6 +5123,67 @@
           "score": 24
         }
       }
+    },
+    {
+      "date": "2026-06-29",
+      "districts": {
+        "chamkarmon": {
+          "level": 1,
+          "score": 24
+        },
+        "daun_penh": {
+          "level": 1,
+          "score": 29
+        },
+        "prampir_makara": {
+          "level": 1,
+          "score": 23
+        },
+        "tuol_kork": {
+          "level": 1,
+          "score": 23
+        },
+        "dangkor": {
+          "level": 1,
+          "score": 35
+        },
+        "mean_chey": {
+          "level": 1,
+          "score": 33
+        },
+        "russey_keo": {
+          "level": 1,
+          "score": 29
+        },
+        "sen_sok": {
+          "level": 1,
+          "score": 34
+        },
+        "pou_senchey": {
+          "level": 1,
+          "score": 31
+        },
+        "chroy_changvar": {
+          "level": 1,
+          "score": 33
+        },
+        "prek_pnov": {
+          "level": 0,
+          "score": 20
+        },
+        "chbar_ampov": {
+          "level": 0,
+          "score": 20
+        },
+        "kamboul": {
+          "level": 0,
+          "score": 20
+        },
+        "boeng_keng_kang": {
+          "level": 0,
+          "score": 9
+        }
+      }
     }
   ]
 }
