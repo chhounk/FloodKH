@@ -5511,7 +5511,7 @@
         },
         "dangkor": {
           "level": 1,
-          "score": 26
+          "score": 23
         },
         "mean_chey": {
           "level": 1,
@@ -5519,7 +5519,7 @@
         },
         "russey_keo": {
           "level": 1,
-          "score": 29
+          "score": 30
         },
         "sen_sok": {
           "level": 1,
@@ -5530,8 +5530,8 @@
           "score": 19
         },
         "chroy_changvar": {
-          "level": 0,
-          "score": 18
+          "level": 1,
+          "score": 21
         },
         "prek_pnov": {
           "level": 0,
@@ -5547,7 +5547,7 @@
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 12
+          "score": 9
         }
       }
     }
