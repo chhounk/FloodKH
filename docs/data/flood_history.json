@@ -5530,16 +5530,16 @@
           "score": 16
         },
         "chroy_changvar": {
-          "level": 1,
-          "score": 21
+          "level": 0,
+          "score": 18
         },
         "prek_pnov": {
           "level": 0,
           "score": 20
         },
         "chbar_ampov": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 23
         },
         "kamboul": {
           "level": 0,
@@ -5547,7 +5547,7 @@
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 9
+          "score": 12
         }
       }
     }
