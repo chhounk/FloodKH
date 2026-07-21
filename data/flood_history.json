@@ -1,67 +1,6 @@
 {
   "snapshots": [
     {
-      "date": "2026-04-21",
-      "districts": {
-        "chamkarmon": {
-          "level": 0,
-          "score": 8
-        },
-        "daun_penh": {
-          "level": 0,
-          "score": 13
-        },
-        "prampir_makara": {
-          "level": 0,
-          "score": 7
-        },
-        "tuol_kork": {
-          "level": 0,
-          "score": 7
-        },
-        "dangkor": {
-          "level": 0,
-          "score": 15
-        },
-        "mean_chey": {
-          "level": 0,
-          "score": 13
-        },
-        "russey_keo": {
-          "level": 0,
-          "score": 13
-        },
-        "sen_sok": {
-          "level": 0,
-          "score": 14
-        },
-        "pou_senchey": {
-          "level": 0,
-          "score": 11
-        },
-        "chroy_changvar": {
-          "level": 0,
-          "score": 13
-        },
-        "prek_pnov": {
-          "level": 0,
-          "score": 15
-        },
-        "chbar_ampov": {
-          "level": 0,
-          "score": 15
-        },
-        "kamboul": {
-          "level": 0,
-          "score": 15
-        },
-        "boeng_keng_kang": {
-          "level": 0,
-          "score": 4
-        }
-      }
-    },
-    {
       "date": "2026-04-22",
       "districts": {
         "chamkarmon": {
@@ -5492,6 +5431,67 @@
     },
     {
       "date": "2026-07-20",
+      "districts": {
+        "chamkarmon": {
+          "level": 0,
+          "score": 13
+        },
+        "daun_penh": {
+          "level": 0,
+          "score": 18
+        },
+        "prampir_makara": {
+          "level": 0,
+          "score": 12
+        },
+        "tuol_kork": {
+          "level": 0,
+          "score": 12
+        },
+        "dangkor": {
+          "level": 0,
+          "score": 20
+        },
+        "mean_chey": {
+          "level": 0,
+          "score": 18
+        },
+        "russey_keo": {
+          "level": 0,
+          "score": 18
+        },
+        "sen_sok": {
+          "level": 0,
+          "score": 19
+        },
+        "pou_senchey": {
+          "level": 0,
+          "score": 16
+        },
+        "chroy_changvar": {
+          "level": 0,
+          "score": 18
+        },
+        "prek_pnov": {
+          "level": 0,
+          "score": 20
+        },
+        "chbar_ampov": {
+          "level": 0,
+          "score": 20
+        },
+        "kamboul": {
+          "level": 0,
+          "score": 20
+        },
+        "boeng_keng_kang": {
+          "level": 0,
+          "score": 9
+        }
+      }
+    },
+    {
+      "date": "2026-07-21",
       "districts": {
         "chamkarmon": {
           "level": 0,
