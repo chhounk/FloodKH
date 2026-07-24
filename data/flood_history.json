@@ -5514,8 +5514,8 @@
           "score": 23
         },
         "mean_chey": {
-          "level": 1,
-          "score": 21
+          "level": 0,
+          "score": 18
         },
         "russey_keo": {
           "level": 1,
@@ -5530,12 +5530,12 @@
           "score": 19
         },
         "chroy_changvar": {
-          "level": 1,
-          "score": 21
+          "level": 0,
+          "score": 18
         },
         "prek_pnov": {
-          "level": 1,
-          "score": 23
+          "level": 0,
+          "score": 20
         },
         "chbar_ampov": {
           "level": 0,
@@ -5547,7 +5547,7 @@
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 9
+          "score": 12
         }
       }
     }
