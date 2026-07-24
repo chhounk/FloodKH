@@ -5495,15 +5495,15 @@
       "districts": {
         "chamkarmon": {
           "level": 0,
-          "score": 16
+          "score": 19
         },
         "daun_penh": {
           "level": 1,
-          "score": 21
+          "score": 24
         },
         "prampir_makara": {
           "level": 0,
-          "score": 15
+          "score": 18
         },
         "tuol_kork": {
           "level": 0,
@@ -5511,11 +5511,11 @@
         },
         "dangkor": {
           "level": 1,
-          "score": 23
+          "score": 35
         },
         "mean_chey": {
-          "level": 0,
-          "score": 18
+          "level": 1,
+          "score": 29
         },
         "russey_keo": {
           "level": 1,
@@ -5530,24 +5530,24 @@
           "score": 19
         },
         "chroy_changvar": {
-          "level": 0,
-          "score": 18
+          "level": 1,
+          "score": 24
         },
         "prek_pnov": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 23
         },
         "chbar_ampov": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 35
         },
         "kamboul": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 35
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 12
+          "score": 15
         }
       }
     }
