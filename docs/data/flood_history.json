@@ -5531,7 +5531,7 @@
         },
         "chroy_changvar": {
           "level": 1,
-          "score": 24
+          "score": 21
         },
         "prek_pnov": {
           "level": 1,
@@ -5542,12 +5542,12 @@
           "score": 20
         },
         "kamboul": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 23
         },
         "boeng_keng_kang": {
           "level": 0,
-          "score": 9
+          "score": 12
         }
       }
     }
