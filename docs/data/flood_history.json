@@ -5507,11 +5507,11 @@
         },
         "tuol_kork": {
           "level": 0,
-          "score": 15
+          "score": 18
         },
         "dangkor": {
           "level": 1,
-          "score": 23
+          "score": 26
         },
         "mean_chey": {
           "level": 1,
@@ -5523,19 +5523,19 @@
         },
         "sen_sok": {
           "level": 1,
-          "score": 22
+          "score": 25
         },
         "pou_senchey": {
-          "level": 0,
-          "score": 19
+          "level": 1,
+          "score": 22
         },
         "chroy_changvar": {
           "level": 1,
           "score": 24
         },
         "prek_pnov": {
-          "level": 1,
-          "score": 23
+          "level": 0,
+          "score": 20
         },
         "chbar_ampov": {
           "level": 0,
