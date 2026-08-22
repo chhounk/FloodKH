@@ -5494,8 +5494,8 @@
       "date": "2026-08-22",
       "districts": {
         "chamkarmon": {
-          "level": 1,
-          "score": 22
+          "level": 0,
+          "score": 18
         },
         "daun_penh": {
           "level": 1,
@@ -5511,15 +5511,15 @@
         },
         "dangkor": {
           "level": 1,
-          "score": 29
+          "score": 25
         },
         "mean_chey": {
           "level": 1,
-          "score": 26
+          "score": 30
         },
         "russey_keo": {
           "level": 1,
-          "score": 27
+          "score": 23
         },
         "sen_sok": {
           "level": 1,
@@ -5527,15 +5527,15 @@
         },
         "pou_senchey": {
           "level": 1,
-          "score": 25
+          "score": 21
         },
         "chroy_changvar": {
           "level": 1,
-          "score": 23
+          "score": 27
         },
         "prek_pnov": {
-          "level": 0,
-          "score": 20
+          "level": 1,
+          "score": 29
         },
         "chbar_ampov": {
           "level": 0,
