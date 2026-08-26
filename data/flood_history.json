@@ -5495,15 +5495,15 @@
       "districts": {
         "chamkarmon": {
           "level": 0,
-          "score": 13
+          "score": 16
         },
         "daun_penh": {
-          "level": 0,
-          "score": 18
+          "level": 1,
+          "score": 21
         },
         "prampir_makara": {
           "level": 0,
-          "score": 12
+          "score": 15
         },
         "tuol_kork": {
           "level": 0,
@@ -5530,8 +5530,8 @@
           "score": 16
         },
         "chroy_changvar": {
-          "level": 1,
-          "score": 21
+          "level": 0,
+          "score": 18
         },
         "prek_pnov": {
           "level": 0,
