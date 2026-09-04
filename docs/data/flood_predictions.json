@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T15:39:38.296062+00:00",
+  "generated_at": "2026-09-04T20:11:22.492885+00:00",
   "model_version": "1.0.0",
   "data_sources_status": {
     "open_meteo": "ok",
@@ -33,10 +33,10 @@
         ],
         "rainfall_24h_mm": 3.5,
         "rainfall_3d_mm": 3.9,
-        "rainfall_7d_mm": 15.3,
+        "rainfall_7d_mm": 14.2,
         "forecast_24h_mm": 9.2,
         "forecast_48h_mm": 6.0,
-        "forecast_72h_mm": 5.2,
+        "forecast_72h_mm": 5.3,
         "soil_moisture": 0.17,
         "soil_moisture_deep": 0.23,
         "river_discharge_ratio": 0.0
@@ -63,15 +63,15 @@
           ]
         },
         "t48h": {
-          "level": 1,
-          "label": "WATCH",
-          "score": 21,
-          "score_low": 16,
-          "score_high": 25,
+          "level": 0,
+          "label": "NORMAL",
+          "score": 16,
+          "score_low": 12,
+          "score_high": 19,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 8,
+            "rainfall": 3,
             "soil": 0,
             "river": 5,
             "satellite": 0,
@@ -130,10 +130,10 @@
         ],
         "rainfall_24h_mm": 3.5,
         "rainfall_3d_mm": 3.9,
-        "rainfall_7d_mm": 15.3,
+        "rainfall_7d_mm": 14.2,
         "forecast_24h_mm": 9.2,
         "forecast_48h_mm": 6.0,
-        "forecast_72h_mm": 5.2,
+        "forecast_72h_mm": 5.3,
         "soil_moisture": 0.17,
         "soil_moisture_deep": 0.23,
         "river_discharge_ratio": 0.0
@@ -164,13 +164,13 @@
         "t48h": {
           "level": 1,
           "label": "WATCH",
-          "score": 26,
-          "score_low": 20,
-          "score_high": 31,
+          "score": 21,
+          "score_low": 16,
+          "score_high": 25,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 8,
+            "rainfall": 3,
             "soil": 0,
             "river": 5,
             "satellite": 0,
@@ -231,10 +231,10 @@
         ],
         "rainfall_24h_mm": 3.5,
         "rainfall_3d_mm": 3.9,
-        "rainfall_7d_mm": 15.3,
+        "rainfall_7d_mm": 14.2,
         "forecast_24h_mm": 9.2,
         "forecast_48h_mm": 6.0,
-        "forecast_72h_mm": 5.2,
+        "forecast_72h_mm": 5.3,
         "soil_moisture": 0.17,
         "soil_moisture_deep": 0.23,
         "river_discharge_ratio": 0.0
@@ -263,13 +263,13 @@
         "t48h": {
           "level": 0,
           "label": "NORMAL",
-          "score": 20,
-          "score_low": 16,
-          "score_high": 24,
+          "score": 15,
+          "score_low": 12,
+          "score_high": 18,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 8,
+            "rainfall": 3,
             "soil": 0,
             "river": 5,
             "satellite": 0,
@@ -327,10 +327,10 @@
         ],
         "rainfall_24h_mm": 2.4,
         "rainfall_3d_mm": 3.0,
-        "rainfall_7d_mm": 12.0,
+        "rainfall_7d_mm": 10.8,
         "forecast_24h_mm": 7.0,
         "forecast_48h_mm": 5.7,
-        "forecast_72h_mm": 5.5,
+        "forecast_72h_mm": 5.6,
         "soil_moisture": 0.14,
         "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
@@ -381,19 +381,20 @@
         "t72h": {
           "level": 0,
           "label": "NORMAL",
-          "score": 17,
-          "score_low": 11,
-          "score_high": 22,
+          "score": 12,
+          "score_low": 8,
+          "score_high": 15,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 5,
+            "rainfall": 0,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 7
           },
           "factors": [
+            "Low rainfall",
             "Dry soil conditions",
             "Tonle Sap reverse flow active"
           ]
@@ -428,7 +429,7 @@
         ],
         "rainfall_24h_mm": 3.8,
         "rainfall_3d_mm": 4.2,
-        "rainfall_7d_mm": 15.6,
+        "rainfall_7d_mm": 12.5,
         "forecast_24h_mm": 7.7,
         "forecast_48h_mm": 6.0,
         "forecast_72h_mm": 4.4,
@@ -538,7 +539,7 @@
         ],
         "rainfall_24h_mm": 2.5,
         "rainfall_3d_mm": 2.9,
-        "rainfall_7d_mm": 14.8,
+        "rainfall_7d_mm": 11.5,
         "forecast_24h_mm": 5.3,
         "forecast_48h_mm": 3.2,
         "forecast_72h_mm": 5.4,
@@ -648,10 +649,10 @@
         ],
         "rainfall_24h_mm": 7.3,
         "rainfall_3d_mm": 7.6,
-        "rainfall_7d_mm": 14.4,
+        "rainfall_7d_mm": 14.0,
         "forecast_24h_mm": 8.4,
         "forecast_48h_mm": 2.9,
-        "forecast_72h_mm": 4.8,
+        "forecast_72h_mm": 4.9,
         "soil_moisture": 0.28,
         "soil_moisture_deep": 0.24,
         "river_discharge_ratio": 0.0
@@ -754,10 +755,10 @@
         ],
         "rainfall_24h_mm": 2.4,
         "rainfall_3d_mm": 3.0,
-        "rainfall_7d_mm": 12.0,
+        "rainfall_7d_mm": 10.8,
         "forecast_24h_mm": 7.0,
         "forecast_48h_mm": 5.7,
-        "forecast_72h_mm": 5.5,
+        "forecast_72h_mm": 5.6,
         "soil_moisture": 0.14,
         "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
@@ -810,21 +811,22 @@
           ]
         },
         "t72h": {
-          "level": 1,
-          "label": "WATCH",
-          "score": 24,
-          "score_low": 16,
-          "score_high": 31,
+          "level": 0,
+          "label": "NORMAL",
+          "score": 19,
+          "score_low": 13,
+          "score_high": 24,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 5,
+            "rainfall": 0,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 14
           },
           "factors": [
+            "Low rainfall",
             "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
@@ -859,10 +861,10 @@
         ],
         "rainfall_24h_mm": 2.4,
         "rainfall_3d_mm": 3.0,
-        "rainfall_7d_mm": 12.0,
+        "rainfall_7d_mm": 10.8,
         "forecast_24h_mm": 7.0,
         "forecast_48h_mm": 5.7,
-        "forecast_72h_mm": 5.5,
+        "forecast_72h_mm": 5.6,
         "soil_moisture": 0.14,
         "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
@@ -913,21 +915,22 @@
           ]
         },
         "t72h": {
-          "level": 1,
-          "label": "WATCH",
-          "score": 21,
-          "score_low": 14,
-          "score_high": 27,
+          "level": 0,
+          "label": "NORMAL",
+          "score": 16,
+          "score_low": 11,
+          "score_high": 20,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 5,
+            "rainfall": 0,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 11
           },
           "factors": [
+            "Low rainfall",
             "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure"
@@ -962,10 +965,10 @@
         ],
         "rainfall_24h_mm": 5.7,
         "rainfall_3d_mm": 5.9,
-        "rainfall_7d_mm": 12.3,
+        "rainfall_7d_mm": 11.9,
         "forecast_24h_mm": 7.1,
         "forecast_48h_mm": 7.6,
-        "forecast_72h_mm": 5.9,
+        "forecast_72h_mm": 6.0,
         "soil_moisture": 0.28,
         "soil_moisture_deep": 0.23,
         "river_discharge_ratio": 0.0
@@ -1061,19 +1064,21 @@
           "vulnerability": 15
         },
         "factors": [
+          "Low rainfall",
+          "Dry soil conditions",
           "Tonle Sap reverse flow active",
           "Poor drainage infrastructure",
           "Low elevation (8.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": null,
-        "rainfall_3d_mm": null,
-        "rainfall_7d_mm": null,
-        "forecast_24h_mm": null,
-        "forecast_48h_mm": null,
-        "forecast_72h_mm": null,
-        "soil_moisture": null,
-        "soil_moisture_deep": null,
+        "rainfall_24h_mm": 7.3,
+        "rainfall_3d_mm": 7.6,
+        "rainfall_7d_mm": 14.0,
+        "forecast_24h_mm": 8.4,
+        "forecast_48h_mm": 2.9,
+        "forecast_72h_mm": 4.9,
+        "soil_moisture": 0.28,
+        "soil_moisture_deep": 0.24,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1093,6 +1098,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (8.5 m)",
@@ -1115,6 +1122,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (8.5 m)",
@@ -1122,21 +1131,22 @@
           ]
         },
         "t72h": {
-          "level": 0,
-          "label": "NORMAL",
-          "score": 20,
-          "score_low": 14,
-          "score_high": 26,
+          "level": 1,
+          "label": "WATCH",
+          "score": 25,
+          "score_low": 17,
+          "score_high": 32,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 0,
+            "rainfall": 5,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 15
           },
           "factors": [
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (8.5 m)",
@@ -1164,19 +1174,21 @@
           "vulnerability": 15
         },
         "factors": [
+          "Low rainfall",
+          "Dry soil conditions",
           "Tonle Sap reverse flow active",
           "Poor drainage infrastructure",
           "Low elevation (6.5 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": null,
-        "rainfall_3d_mm": null,
-        "rainfall_7d_mm": null,
-        "forecast_24h_mm": null,
-        "forecast_48h_mm": null,
-        "forecast_72h_mm": null,
-        "soil_moisture": null,
-        "soil_moisture_deep": null,
+        "rainfall_24h_mm": 2.5,
+        "rainfall_3d_mm": 2.9,
+        "rainfall_7d_mm": 11.5,
+        "forecast_24h_mm": 5.3,
+        "forecast_48h_mm": 3.2,
+        "forecast_72h_mm": 5.4,
+        "soil_moisture": 0.17,
+        "soil_moisture_deep": 0.17,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1196,6 +1208,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
@@ -1218,6 +1232,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
@@ -1240,6 +1256,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (6.5 m)",
@@ -1267,19 +1285,21 @@
           "vulnerability": 15
         },
         "factors": [
+          "Low rainfall",
+          "Dry soil conditions",
           "Tonle Sap reverse flow active",
           "Poor drainage infrastructure",
           "Low elevation (9.0 m)",
           "High flood history area"
         ],
-        "rainfall_24h_mm": null,
-        "rainfall_3d_mm": null,
-        "rainfall_7d_mm": null,
-        "forecast_24h_mm": null,
-        "forecast_48h_mm": null,
-        "forecast_72h_mm": null,
-        "soil_moisture": null,
-        "soil_moisture_deep": null,
+        "rainfall_24h_mm": 3.8,
+        "rainfall_3d_mm": 4.2,
+        "rainfall_7d_mm": 12.5,
+        "forecast_24h_mm": 7.7,
+        "forecast_48h_mm": 6.0,
+        "forecast_72h_mm": 4.4,
+        "soil_moisture": 0.25,
+        "soil_moisture_deep": 0.25,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
@@ -1299,6 +1319,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
@@ -1321,6 +1343,8 @@
             "vulnerability": 15
           },
           "factors": [
+            "Low rainfall",
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
@@ -1328,21 +1352,22 @@
           ]
         },
         "t72h": {
-          "level": 0,
-          "label": "NORMAL",
-          "score": 20,
-          "score_low": 14,
-          "score_high": 26,
+          "level": 1,
+          "label": "WATCH",
+          "score": 25,
+          "score_low": 17,
+          "score_high": 32,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 0,
+            "rainfall": 5,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 15
           },
           "factors": [
+            "Dry soil conditions",
             "Tonle Sap reverse flow active",
             "Poor drainage infrastructure",
             "Low elevation (9.0 m)",
@@ -1361,82 +1386,86 @@
         "district_id": "boeng_keng_kang",
         "level": 0,
         "label": "NORMAL",
-        "score": 9,
+        "score": 12,
         "component_scores": {
-          "rainfall": 0,
+          "rainfall": 3,
           "soil": 0,
           "river": 5,
           "satellite": 0,
           "vulnerability": 4
         },
         "factors": [
+          "Dry soil conditions",
           "Tonle Sap reverse flow active"
         ],
-        "rainfall_24h_mm": null,
-        "rainfall_3d_mm": null,
-        "rainfall_7d_mm": null,
-        "forecast_24h_mm": null,
-        "forecast_48h_mm": null,
-        "forecast_72h_mm": null,
-        "soil_moisture": null,
-        "soil_moisture_deep": null,
+        "rainfall_24h_mm": 3.5,
+        "rainfall_3d_mm": 3.9,
+        "rainfall_7d_mm": 14.2,
+        "forecast_24h_mm": 9.2,
+        "forecast_48h_mm": 6.0,
+        "forecast_72h_mm": 5.3,
+        "soil_moisture": 0.17,
+        "soil_moisture_deep": 0.23,
         "river_discharge_ratio": 0.0
       },
       "forecast": {
         "t24h": {
           "level": 0,
           "label": "NORMAL",
-          "score": 9,
-          "score_low": 8,
-          "score_high": 9,
+          "score": 12,
+          "score_low": 10,
+          "score_high": 13,
           "confidence": "high",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 0,
+            "rainfall": 3,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 4
           },
           "factors": [
+            "Dry soil conditions",
             "Tonle Sap reverse flow active"
           ]
         },
         "t48h": {
           "level": 0,
           "label": "NORMAL",
-          "score": 9,
-          "score_low": 7,
-          "score_high": 10,
+          "score": 12,
+          "score_low": 9,
+          "score_high": 14,
           "confidence": "medium",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 0,
+            "rainfall": 3,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 4
           },
           "factors": [
+            "Dry soil conditions",
             "Tonle Sap reverse flow active"
           ]
         },
         "t72h": {
           "level": 0,
           "label": "NORMAL",
-          "score": 9,
-          "score_low": 6,
-          "score_high": 11,
+          "score": 17,
+          "score_low": 11,
+          "score_high": 22,
           "confidence": "low",
           "key_driver": "Forecast rainfall accumulation",
           "component_scores": {
-            "rainfall": 0,
+            "rainfall": 8,
             "soil": 0,
             "river": 5,
             "satellite": 0,
             "vulnerability": 4
           },
           "factors": [
+            "Dry soil conditions",
             "Tonle Sap reverse flow active"
           ]
         }
