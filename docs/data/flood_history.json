@@ -1,67 +1,6 @@
 {
   "snapshots": [
     {
-      "date": "2026-08-16",
-      "districts": {
-        "chamkarmon": {
-          "level": 0,
-          "score": 16
-        },
-        "daun_penh": {
-          "level": 1,
-          "score": 21
-        },
-        "prampir_makara": {
-          "level": 0,
-          "score": 15
-        },
-        "tuol_kork": {
-          "level": 0,
-          "score": 15
-        },
-        "dangkor": {
-          "level": 1,
-          "score": 32
-        },
-        "mean_chey": {
-          "level": 1,
-          "score": 25
-        },
-        "russey_keo": {
-          "level": 1,
-          "score": 24
-        },
-        "sen_sok": {
-          "level": 1,
-          "score": 22
-        },
-        "pou_senchey": {
-          "level": 0,
-          "score": 19
-        },
-        "chroy_changvar": {
-          "level": 1,
-          "score": 21
-        },
-        "prek_pnov": {
-          "level": 1,
-          "score": 26
-        },
-        "chbar_ampov": {
-          "level": 0,
-          "score": 20
-        },
-        "kamboul": {
-          "level": 0,
-          "score": 20
-        },
-        "boeng_keng_kang": {
-          "level": 0,
-          "score": 9
-        }
-      }
-    },
-    {
       "date": "2026-08-17",
       "districts": {
         "chamkarmon": {
@@ -5548,6 +5487,67 @@
         "boeng_keng_kang": {
           "level": 1,
           "score": 22
+        }
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "districts": {
+        "chamkarmon": {
+          "level": 0,
+          "score": 19
+        },
+        "daun_penh": {
+          "level": 1,
+          "score": 24
+        },
+        "prampir_makara": {
+          "level": 1,
+          "score": 22
+        },
+        "tuol_kork": {
+          "level": 1,
+          "score": 22
+        },
+        "dangkor": {
+          "level": 1,
+          "score": 33
+        },
+        "mean_chey": {
+          "level": 1,
+          "score": 27
+        },
+        "russey_keo": {
+          "level": 1,
+          "score": 31
+        },
+        "sen_sok": {
+          "level": 1,
+          "score": 29
+        },
+        "pou_senchey": {
+          "level": 1,
+          "score": 26
+        },
+        "chroy_changvar": {
+          "level": 1,
+          "score": 24
+        },
+        "prek_pnov": {
+          "level": 1,
+          "score": 33
+        },
+        "chbar_ampov": {
+          "level": 1,
+          "score": 33
+        },
+        "kamboul": {
+          "level": 1,
+          "score": 33
+        },
+        "boeng_keng_kang": {
+          "level": 0,
+          "score": 15
         }
       }
     }
